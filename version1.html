@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduling Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #tasks {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scheduling Assistant</h1>
+
+    <div>
+        <h2>Tasks</h2>
+        <ul id="tasks"></ul>
+    </div>
+
+    <div>
+        <h2>Add Task</h2>
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" required>
+        <br>
+        <label for="taskTime">Task Time:</label>
+        <input type="time" id="taskTime" required>
+        <br>
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskName = document.getElementById('taskName').value;
+            const taskTime = document.getElementById('taskTime').value;
+
+            if (taskName && taskTime) {
+                const tasksList = document.getElementById('tasks');
+                const li = document.createElement('li');
+                li.className = 'task';
+                li.innerHTML = `
+                    <span>${taskName} - ${taskTime}</span>
+                    <button onclick="removeTask(this)">Remove</button>
+                `;
+                tasksList.appendChild(li);
+
+                // You can add further logic here to save tasks to a database or local storage.
+            }
+        }
+
+        function removeTask(button) {
+            const taskElement = button.parentElement;
+            taskElement.remove();
+        }
+    </script>
+</body>
+</html>
