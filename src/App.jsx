@@ -25,10 +25,10 @@ function App() {
                   <h4>Username</h4>
                   <input class="form-control" type="text"></input>
                   <h4>Password</h4>
-                  <input class="form-control" type="text"></input>
+                  <input class="form-control" type="password"></input>
                   <button type="button" class="btn btn-light">Log in</button>
-                  <h8>Forgot your password?</h8>
-                  <div><h8>Sign up!</h8></div>
+                  <h8><a href="url">Forgot your password?</a></h8>
+                  <div><h8><a href="url">Sign up!</a></h8></div>
               </div>
 
               <div>
