@@ -1,29 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import peopleWorking from "./assets/peopleWorking.png"
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-        <h1>Scheduling Assistant</h1>
-
-        <div>
-            <h2>Tasks</h2>
-            <ul id="tasks"></ul>
+        <div className="leftContainer">
+          <div className="centered-element">
+            <img src={peopleWorking} width="500" height="500"></img>
+            <h1>Scheduling Assisstant - Simplify Your Life</h1>
+            <h3>All your tasks and preferences in one place</h3>
+          </div>
         </div>
 
-        <div>
-            <h2>Add Task</h2>
-            <label for="taskName">Task Name:</label>
-            <input type="text" id="taskName" required></input>
-            <br></br>
-            <label for="taskTime">Task Time:</label>
-            <input type="time" id="taskTime" required></input>
-            <br></br>
-            <button onclick="addTask()">Add Task</button>
+
+        <div className="rightContainer">
+          <div className="centered-element">
+            <div className="left-align">
+              <h1>Log in</h1>
+              <div>
+                  <h4>Username</h4>
+                  <input class="form-control" type="text"></input>
+                  <h4>Password</h4>
+                  <input class="form-control" type="text"></input>
+                  <button type="button" class="btn btn-light">Log in</button>
+                  <h8>Forgot your password?</h8>
+                  <div><h8>Sign up!</h8></div>
+              </div>
+
+              <div>
+                  
+              </div>
+            </div>
+          </div>
         </div>
     </>
   )
