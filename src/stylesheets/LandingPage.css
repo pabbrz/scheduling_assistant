@@ -1,4 +1,15 @@
-#root {
+/* #root {
+  width: 100vw;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(to right, #d6132c 50%, #161616 50%);
+  height: 100vh;
+  margin: 0;
+  color: white;
+} */
+
+.LandingPageContainer {
   width: 100vw;
   margin: 0 auto;
   padding: 2rem;
