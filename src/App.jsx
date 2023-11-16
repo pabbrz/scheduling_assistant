@@ -11,8 +11,9 @@ function App() {
         <div className="leftContainer">
           <div className="centered-element">
             <img src={peopleWorking} width="500" height="500"></img>
-            <h1>Scheduling Assisstant - Simplify Your Life</h1>
-            <h3>All your tasks and preferences in one place</h3>
+            <h3>Scheduling Assisstant - </h3>
+            <h3>Simplify Your Life</h3>
+            <h8>All your tasks and preferences in one place</h8>
           </div>
         </div>
 
@@ -20,7 +21,7 @@ function App() {
         <div className="rightContainer">
           <div className="centered-element">
             <div className="left-align">
-              <h1>Log in</h1>
+              <h3>Log in</h3>
               <div>
                   <h4>Username</h4>
                   <input class="form-control" type="text"></input>
