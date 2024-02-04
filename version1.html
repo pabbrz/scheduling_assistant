@@ -22,6 +22,29 @@
             align-items: center;
         }
     </style>
+
+    <!-- Firebase SDK script tags -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+     <!-- Add Firebase configuration script -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDtjDJmd-nxp1GMwdzCb_MhqrRC44NnWno",
+            authDomain: "scheduling-assistant-8485d.firebaseapp.com",
+            projectId: "scheduling-assistant-8485d",
+            storageBucket: "null",
+            messagingSenderId: "150704064193",
+            appId: "1:150704064193:web:c3d4315b976ce699487640",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Access Firestore
+        const db = firebase.firestore();
+    </script>
+    
 </head>
 <body>
     <h1>Scheduling Assistant</h1>
@@ -57,7 +80,11 @@
                 `;
                 tasksList.appendChild(li);
 
-                // You can add further logic here to save tasks to a database or local storage.
+                // Save task to Firestore
+                db.collection("tasks").add({
+                    taskName,
+                    taskTime,
+                });
             }
         }
 
