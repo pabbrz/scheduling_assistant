@@ -5,6 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+
+    <!-- Firebase SDK script tags -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+
+    <!-- Firebase configuration script -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDtjDJmd-nxp1GMwdzCb_MhqrRC44NnWno",
+        authDomain: "scheduling-assistant-8485d.firebaseapp.com",
+        projectId: scheduling-assistant-8485d",
+        storageBucket: "null",
+        messagingSenderId: "150704064193",
+        appId: "1:150704064193:web:c3d4315b976ce699487640",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   </head>
   <body>
     <div id="root"></div>
