@@ -1,0 +1,23 @@
+.regContainer {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(to right, #d6132c 50%, #161616 50%);
+    height: 100vh;
+    margin: 0;
+    color: white;
+}
+
+#signupform {
+    width: 40vw;
+    text-align: center;
+
+
+}
+
+.body {
+    width: 100%;
+    min-width: 100vw;
+    
+}
