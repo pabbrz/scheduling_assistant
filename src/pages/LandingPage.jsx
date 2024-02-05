@@ -20,7 +20,7 @@ function LandingPage() {
           <div className="rightContainer">
             <div className="centered-element">
               <div className="left-align">
-                <h3>Log in</h3>
+                <h2>Log in</h2>
                 <div>
                     <h4>Username</h4>
                     <input class="form-control" type="text"></input>
@@ -28,8 +28,9 @@ function LandingPage() {
                     <input class="form-control" type="password"></input>
                     <button type="button" class="btn btn-light">Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
-                    <div><h8><a href="url">Sign up!</a></h8></div>
+                    <div><h8><Link to="/registration" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none" }}>Register!</p></Link></h8></div>
                     <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>
+                    <Link to="/registration" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Registration Page</p></Link>
                 </div>
   
                 <div>
