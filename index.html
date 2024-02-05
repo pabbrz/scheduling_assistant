@@ -11,20 +11,30 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
     <!-- Firebase configuration script -->
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDtjDJmd-nxp1GMwdzCb_MhqrRC44NnWno",
-        authDomain: "scheduling-assistant-8485d.firebaseapp.com",
-        projectId: "scheduling-assistant-8485d",
-        storageBucket: "null",
-        messagingSenderId: "150704064193",
-        appId: "1:150704064193:web:c3d4315b976ce699487640",
-      };
+   <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      firebase.getDatabase();
-    </script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDtjDJmd-nxp1GMwdzCb_MhqrRC44NnWno",
+    authDomain: "scheduling-assistant-8485d.firebaseapp.com",
+    databaseURL: "https://scheduling-assistant-8485d-default-rtdb.firebaseio.com",
+    projectId: "scheduling-assistant-8485d",
+    storageBucket: "scheduling-assistant-8485d.appspot.com",
+    messagingSenderId: "150704064193",
+    appId: "1:150704064193:web:c3d4315b976ce699487640",
+    measurementId: "G-6XJV1VVGCZ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
   </head>
   <body>
     <div id="root"></div>
