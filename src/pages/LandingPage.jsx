@@ -28,7 +28,7 @@ function LandingPage() {
                     <input class="form-control" type="password"></input>
                     <button type="button" class="btn btn-light">Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
-                    <div><h8><a href="url">Sign up!</a></h8></div>
+                    <div><h8><a href="/Registration">Sign up!</a></h8></div>
                     <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>
                 </div>
   
