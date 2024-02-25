@@ -5,16 +5,7 @@ import '../stylesheets/NotificationPage.css'
 function NotificationPage() {
   
     return (
-    //     <div className="NotificationPageContainer">
-    //        <div className="sidebar">
-    //         <div className="profileSection">
-    //             <h4>Abc AAB</h4>
-    //         </div>
-    //         <div className="menuSection">
-    //             <h2>Classes</h2>
-    //             <h2>Grades</h2>
-    //         </div>
-    //     </div>
+    
 
     //     <div className="main-content">
     //       <div className="header">
