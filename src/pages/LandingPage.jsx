@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import '../stylesheets/LandingPage.css'
 import peopleWorking from "../assets/peopleWorking.png"
 import { Link } from "react-router-dom";

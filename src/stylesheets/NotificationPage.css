@@ -1,0 +1,176 @@
+.notification-container {
+    width: 100vw;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-color: #2b2b2b;
+    color: white;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .sidebar, .right-sidebar {
+    background-color: #171717;
+    padding: 20px;
+    min-width: 250px;
+  }
+  
+  .sidebar-item {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .profile-pic {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  .navigation-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu-item {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    cursor: pointer;
+  }
+  
+  .menu-item.active {
+    color: #4d90fe;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #2c2c2c;
+    border: none;
+    color: white;
+  }
+  
+  .reminders {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .task-list {
+    margin-top: 20px;
+  }
+  
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .task-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .task-user-pic {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .task-title {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .task-time, .task-comment, .task-subtitle {
+    margin: 0;
+  }
+  
+  .task-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .like-button, .reply-button {
+    background: none;
+    border: none;
+    color: #4d90fe;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .add-task-btn {
+    display: block;
+    width: 100%;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    margin-top: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .filter-section {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .filter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .filter:last-child {
+    margin-bottom: 0;
+  }
+  
+  .filter input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .filter label {
+    cursor: pointer;
+  }
+  
+  .filter-btn {
+    /* display: block; */
+    width: 100%;
+    background: none;
+    border: 1px solid #575759;
+    padding: 0.1px 8px;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 0.9em;
+   
+transition: background-color 0.3s;
+    margin-top: 10px;
+    border-radius: 25px;
+    margin-bottom: 20px;
+  }
+  
+  .filter-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  /* Add responsive design and other specific details as needed */
+  
+  

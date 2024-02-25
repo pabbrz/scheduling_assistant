@@ -1,4 +1,6 @@
 import '../stylesheets/OverviewPage.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from "react-router-dom";
 
 function OverviewPage() {
     return(
@@ -9,7 +11,8 @@ function OverviewPage() {
                     <div className="welcomePillDiv">
                         <span class="badge badge-pill badge-secondar welcomePill">
                             <div className="welcomePillPhoto"></div>
-                            <p><span id="welcomePillText">Welcome</span><span>someone@my.unt.edu</span></p>
+                            <p><span id="welcomePillText">Welcome</span><span>Someone@my.unt.edu</span></p>
+                           <Link to="/Notification" style={{textDecoration: 'none'}}><p style={{textDecoration: "none", color: "#000"}}>Temporary Link to notification page</p></Link>
                         </span>
                     </div>
                 </div>
