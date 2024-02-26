@@ -5,11 +5,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
 import { auth } from '../firebaseConfig';
+import app from '../firebaseConfig';
 import '../stylesheets/RegistrationPage2.css'
 import peopleWorking from "../assets/peopleWorking.png"
 const loginLink = "/Login";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-
+import 'firebase/auth';
+import 'firebase/firestore';
+// import bcrypt from 'bcrypt';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { getFirestore, collection, addDoc, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
 
 //Sign up function allows the user to set up their name(first and last),
 //their number, email, and password for their new account
@@ -18,6 +22,20 @@ function RegistrationPage() {
   const [password, setPassword] = useState('');
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
+  
+  const db = getFirestore(app);
+  const userCollectionRef = collection(db, 'users');
+  
+//   const generatePasswordHash = async (password) => {
+//     // Generate a salt to add randomness to the hash
+//     const saltRounds = 10;
+//     const salt = await bcrypt.genSalt(saltRounds);
+  
+//     // Generate the hash using the salt and the password
+//     const hash = await bcrypt.hash(password, salt);
+  
+//     return hash;
+//   };
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -36,17 +54,23 @@ function RegistrationPage() {
   // get functions to build form with useForm() hook
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
-
+//   const passwordHash = generatePasswordHash(password);
   // Sends data to db if sign up credentials are proper
   const onSubmit = async (e) => {
-   
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async(userCredential) => {
           // Signed in
           const user = userCredential.user;
+          await addDoc(collection(db, "users"), {
+            email: user.email,
+            password_hash: "******************************",
+            user_id: user.uid,
+            username: fname+' '+lname
+          })
           console.log(user);
           // setShowSignUp(!showSignUp);
           // ...
+          window.location.href = '/';
       })
       .catch((error) => {
           const errorCode = error.code;
@@ -54,7 +78,6 @@ function RegistrationPage() {
           console.log(errorCode, errorMessage);
           // ..
       });
-    
   };
 
   return (
