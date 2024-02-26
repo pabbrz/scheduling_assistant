@@ -20,6 +20,13 @@ async function registerUser(email, password) {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User registered:', user.uid);
+      window.alert("User created successfully");
+      // Store new user into database
+      set(ref(db, 'users/' + user.uid), {
+        username: username.value,
+        email: email.value,
+        id: user.uid
+      });
     } catch (error) {
       console.error('Registration error:', error.message);
     }
