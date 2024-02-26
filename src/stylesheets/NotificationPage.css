@@ -5,21 +5,38 @@
     text-align: center;
     display: flex;
     height: 100vh;
+    top: 0;
+    left: 0;
     margin: 0;
-    background-color: #2b2b2b;
+    /* background-color: #2b2b2b; */
+    background-color: black;
     color: white;
     font-family: 'Arial', sans-serif;
   }
   
   .sidebar, .right-sidebar {
-    background-color: #171717;
+    /* background-color: #171717; */
     padding: 20px;
     min-width: 250px;
+    /* top: 0; */
+    left: 0;
+    width: 15vw;
+    height: 100vh;
+    background-color: #2b2b2b;
   }
   
   .sidebar-item {
-    margin-bottom: 30px;
+    padding: 20px;
     text-align: center;
+    background-color: black;
+    display: block;
+    width: 100%;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    cursor: pointer;
   }
   
   .profile-pic {
@@ -31,7 +48,7 @@
   
   .navigation-menu {
     list-style: none;
-    padding: 0;
+    padding: 1000;
   }
   
   .menu-item {
@@ -52,12 +69,13 @@
   }
   
   .search-bar input {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 20px;
     background-color: #2c2c2c;
     border: none;
     color: white;
+    border-radius: 15px;
   }
   
   .reminders {
@@ -112,7 +130,7 @@
   
   .add-task-btn {
     display: block;
-    width: 100%;
+    width: 50%;
     background-color: red;
     color: white;
     padding: 10px;
@@ -151,13 +169,23 @@
     /* display: block; */
     width: 100%;
     background: none;
-    border: 1px solid #575759;
-    padding: 0.1px 8px;
-    border-radius: 4px;
+    /* border: 1px solid #575759; */
+    /* padding: 0.1px 8px; */
+    /* /border-radius: 4px; */
     background-color: white;
     color: black;
     cursor: pointer;
     font-size: 0.9em;
+
+     display: block;
+    /* width: 50%; */
+    /* color: white; */
+    padding: 10px;
+    border: none;
+    margin-top: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    /* cursor: pointer; */
    
 transition: background-color 0.3s;
     margin-top: 10px;

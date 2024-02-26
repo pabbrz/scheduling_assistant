@@ -1,9 +1,40 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../stylesheets/NotificationPage.css'
+import React, {useState} from 'react';
 // import { Link } from 'react-router-dom';
 
 function NotificationPage() {
   
+  const [commentsChecked, setCommentsChecked] = useState(false);
+  const [likesChecked, setLikesChecked] = useState(false);
+  const [reviewChecked, setReviewChecked] = useState(false);
+  const [mentionsChecked, setMentionsChecked] = useState(false);
+  const [purchasesChecked, setPurchasesChecked] = useState(false);
+  const [messageChecked, setMessageChecked] = useState(false);
+
+  const handleCommentsChange = () => {
+    setCommentsChecked(!commentsChecked);
+  };
+
+  const handleLikesChange = () => {
+    setLikesChecked(!likesChecked);
+  };
+
+  const handleReviewChange = () => {
+    setReviewChecked(!reviewChecked);
+  };
+
+  const handleMentionsChange = () => {
+    setMentionsChecked(!mentionsChecked);
+  };
+
+  const handlePurchasesChange = () => {
+    setPurchasesChecked(!purchasesChecked);
+  };
+
+  const handleMessageChange = () => {
+    setMessageChecked(!messageChecked);
+  };
     return (
     
 
@@ -37,7 +68,7 @@ function NotificationPage() {
           <span>Welcome to [user email]</span>
         </div>
         <nav className="navigation-menu">
-          <a href="#" className="menu-item active">Task Overview</a>
+          <a href="#" className="menu-item">Task Overview</a>
           <a href="#" className="menu-item">Classes</a>
           <a href="#" className="menu-item">Grades</a>
           <a href="#" className="menu-item">Teachers</a>
@@ -89,12 +120,18 @@ function NotificationPage() {
         <div className="filter-section">
           <h2>Filter Tasks</h2>
           <div className="filters">
-            <div className="filter"><input type="checkbox" id="comments" checked /><label htmlFor="comments">Comments</label></div>
-            <div className="filter"><input type="checkbox" id="likes" checked /><label htmlFor="likes">Likes</label></div>
-            <div className="filter"><input type="checkbox" id="review" checked /><label htmlFor="review">Review</label></div>
-            <div className="filter"><input type="checkbox" id="mentions" checked /><label htmlFor="mentions">Mentions</label></div>
-            <div className="filter"><input type="checkbox" id="purchases" checked /><label htmlFor="purchases">Purchases</label></div>
-            <div className="filter"><input type="checkbox" id="message" checked /><label htmlFor="message">Message</label></div>
+            <div className="filter"><input type="checkbox" id="comments" checked={commentsChecked} onChange={handleCommentsChange} />
+            <label htmlFor="comments">Comments</label></div>
+            <div className="filter"><input type="checkbox" id="likes" checked={likesChecked} onChange={handleLikesChange} />
+            <label htmlFor="likes">Likes</label></div>
+            <div className="filter"><input type="checkbox" id="review" checked={reviewChecked} onChange={handleReviewChange} />
+            <label htmlFor="review">Review</label></div>
+            <div className="filter"><input type="checkbox" id="mentions" checked={mentionsChecked} onChange={handleMentionsChange} />
+            <label htmlFor="mentions">Mentions</label></div>
+            <div className="filter"><input type="checkbox" id="purchases" checked={purchasesChecked} onChange={handlePurchasesChange} />
+            <label htmlFor="purchases">Purchases</label></div>
+            <div className="filter"><input type="checkbox" id="message" checked={messageChecked} onChange={handleMessageChange} />
+            <label htmlFor="message">Message</label></div>
           </div>
           <div className="filter-actions">
             <button className="filter-btn">Select All</button>
