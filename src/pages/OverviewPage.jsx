@@ -21,6 +21,16 @@ import mail from "../assets/mail.svg"
 import message from "../assets/message.svg"
 import taskItem from "../assets/taskItem.svg"
 
+{/* Add task */}
+// import { useState } from 'react'
+// import TaskForm from '../components/TaskForm'
+// const [tasks, setTasks] = useState([]);
+// const addTask = (task) => {
+// setTasks([...tasks, task]);
+// };
+
+
+
 function OverviewPage() {
     return(
         <>
@@ -87,12 +97,21 @@ function OverviewPage() {
 
                     </div>
                     <div className="top">
+                        <h5>Add Task Nola</h5>
+                        {/* <TaskForm addTask={addTask} />
+                        <ul>
+                            {tasks.map((task, index) => (
+                            <li key={index}>{`${task.taskName} - Due by: ${task.dueDate}`}</li>
+                            ))}
+                        </ul> */}
+                    </div>
+                    <div className="middle">
                         <h5>Urgent Tasks</h5>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                     </div>
-                    <div className="middle">
+                    <div className="bottom">
                         <h5>Notifications</h5>
                     </div>
                     
