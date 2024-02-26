@@ -13,3 +13,19 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
+// Function to register a user
+async function registerUser(email, password) {
+    try {
+      // Create a new user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('User registered:', user.uid);
+    } catch (error) {
+      console.error('Registration error:', error.message);
+    }
+  }
+  
+  // Get user email from front end and register here!
+  
+  // Call the registerUser function with the provided email and password
+  registerUser(email, password);
