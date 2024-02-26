@@ -1,5 +1,13 @@
 import '../stylesheets/OverviewPage.css'
 
+{/* Calendar */}
+// import Calendar from 'react-calendar'
+// import 'react-calendar/dist/Calendar.css';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+// import 'path/to/superhero/bootstrap.min.css';
+
+
 {/* Image imports */}
 import task from "../assets/task.png"
 import school from "../assets/school.png"
@@ -8,6 +16,10 @@ import teachers from "../assets/teachers.png"
 import notes from "../assets/notes.png"
 import preferences from "../assets/preferences.png"
 import logout from "../assets/logout.png"
+import bell from "../assets/bell.svg"
+import mail from "../assets/mail.svg"
+import message from "../assets/message.svg"
+import taskItem from "../assets/taskItem.svg"
 
 function OverviewPage() {
     return(
@@ -39,11 +51,50 @@ function OverviewPage() {
 
                 {/* Middle Portion */}
                 <div className="middle">
+                    
+                    {/* Middle Header */}
+                    <div className="middleHeader">
+                        <div className="leftMiddleHeader">
+                            <h2 className="title">Overview</h2>
+                        </div>
+                        <div className="rightMiddleHeader">
+                            <input className="form-control" type="text"></input>
+                            <button className="iconButton"><img className="iconImg" src={bell} /></button>
+                            <button className="iconButton"><img className="iconImg" src={mail} /></button>
+                            <button className="iconButton"><img className="iconImg" src={message} /></button>
+                        </div>
+                    </div>
+
+                    {/* Middle Main */}
+                    <div className="middleMain">
+                        <div className="scrollableContent">
+                            <div className="calendar">
+                                <FullCalendar
+                                    plugins={[dayGridPlugin]}
+                                    initialView="dayGridMonth"
+                                    weekends={true}
+                                    themeSystem="bootstrap"
+                                />
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
                 {/* Right Sidebar */}
                 <div className="rightSidebar">
+                    <div className="spacer">
+
+                    </div>
+                    <div className="top">
+                        <h5>Urgent Tasks</h5>
+                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
+                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
+                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
+                    </div>
+                    <div className="middle">
+                        <h5>Notifications</h5>
+                    </div>
                     
                 </div>
             </div>
