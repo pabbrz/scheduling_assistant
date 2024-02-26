@@ -4,13 +4,20 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
+import { auth } from '../firebaseConfig';
 import '../stylesheets/RegistrationPage2.css'
 import peopleWorking from "../assets/peopleWorking.png"
 const loginLink = "/Login";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+
 
 //Sign up function allows the user to set up their name(first and last),
 //their number, email, and password for their new account
 function RegistrationPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
 
   // form validation rules
   const validationSchema = Yup.object().shape({
@@ -31,18 +38,23 @@ function RegistrationPage() {
   const { errors } = formState;
 
   // Sends data to db if sign up credentials are proper
-  const onSubmit = async (data) => {
-    try {
-      const response = await axios.post("http://localhost:4000/register", data); //sends data to db
-      console.log("User Registered Successfully");
-      setShowForm(false); //hides form and shows validation for registering
-    } catch (error) {
-      if (error.response.status == 400) {
-        setShowMessage(true); //tells user email is already being used
-      }
-      console.log(error.response);
-      console.log("Error registering user:", error);
-    }
+  const onSubmit = async (e) => {
+   
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          // setShowSignUp(!showSignUp);
+          // ...
+      })
+      .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          // ..
+      });
+    
   };
 
   return (
@@ -75,11 +87,13 @@ function RegistrationPage() {
                     <input
                     type="text"
                     name="fname"
+                    value={fname}
                     autocomplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("fname")}
                     className={`form-control ${errors.fname ? "is-invalid" : ""}`}
                     id="fname"
+                    onChange={(e) => setFname(e.target.value)}
                     />
                     <div className="invalid-feedback">{errors.fname?.message}</div>
                 </div>
@@ -91,11 +105,13 @@ function RegistrationPage() {
                     <input
                     type="text"
                     name="lname"
+                    value={lname}
                     autocomplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("lname")}
                     className={`form-control ${errors.lname ? "is-invalid" : ""}`}
                     id="lname"
+                    onChange={(e) => setLname(e.target.value)}
                     />
                     <div className="invalid-feedback">{errors.lname?.message}</div>
                 </div>
@@ -107,11 +123,13 @@ function RegistrationPage() {
                     <input
                     type="email"
                     name="email"
+                    value={email}
                     autocomplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("email")}
                     className={`form-control ${errors.email ? "is-invalid" : ""}`}
                     id="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     />
                     <div className="invalid-feedback">{errors.email?.message}</div>
                     {/* <div id="emailHelp" className="form-text">
@@ -126,6 +144,7 @@ function RegistrationPage() {
                     <input
                     type="password"
                     name="password"
+                    value={password}
                     autocomplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("password")}
@@ -133,6 +152,7 @@ function RegistrationPage() {
                         errors.password ? "is-invalid" : ""
                     }`}
                     id="password"
+                    onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className="invalid-feedback">
                     {errors.password?.message}
