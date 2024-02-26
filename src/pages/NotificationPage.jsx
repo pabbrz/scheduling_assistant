@@ -38,29 +38,6 @@ function NotificationPage() {
     return (
     
 
-    //     <div className="main-content">
-    //       <div className="header">
-    //       {/* Search and other header content here */}
-    //       </div>
-
-    //     <div className="reminders-section">
-    //       <h2>Reminders</h2>
-    //       <div className="task-list">
-    //         {/* Task items here */}
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   <div className="right-sidebar">
-    //     <div className="add-task-button">
-    //       {/* Add task button */}
-    //     </div>
-    //     <div className="filter-tasks">
-    //       {/* Filter tasks section */}
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="notification-container">
       <aside className="sidebar">
         <div className="sidebar-item">
