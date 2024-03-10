@@ -1,4 +1,5 @@
 import '../stylesheets/OverviewPage.css'
+import CreateTask from '../tasks/create/page';
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -98,6 +99,7 @@ function OverviewPage() {
                     </div>
                     <div className="top">
                         <h5>Add Task</h5>
+                        <CreateTask />
                         {/* <TaskForm addTask={addTask} />
                         <ul>
                             {tasks.map((task, index) => (
