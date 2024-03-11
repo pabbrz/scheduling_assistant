@@ -147,7 +147,20 @@
 .iconImg {
     max-height: 1rem;
     max-width: 1rem;
+    /* position: relative;
+    display: inline-block; */
 }
+
+/* .iconImg .myBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+} */
 
 .iconImg:hover {
     border: none;

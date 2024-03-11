@@ -1,5 +1,6 @@
 import '../stylesheets/OverviewPage.css'
 import CreateTask from '../tasks/create/page';
+import Badge from 'react-bootstrap/Badge'
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -70,9 +71,16 @@ function OverviewPage() {
                         </div>
                         <div className="rightMiddleHeader">
                             <input className="form-control" type="text"></input>
-                            <button className="iconButton"><img className="iconImg" src={bell} /></button>
-                            <button className="iconButton"><img className="iconImg" src={mail} /></button>
-                            <button className="iconButton"><img className="iconImg" src={message} /></button>
+                            <div className="iconWithBadge">
+                                <button className="iconButton"><img className="iconImg" src={bell} /></button>
+                                {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge> */}
+                            </div>
+                            <div className="iconWithBadge">
+                                <button className="iconButton"><img className="iconImg" src={mail} /></button>
+                            </div>
+                            <div className="iconWithBadge">
+                                <button className="iconButton"><img className="iconImg" src={message} /></button>
+                            </div>
                         </div>
                     </div>
 
@@ -94,9 +102,11 @@ function OverviewPage() {
 
                 {/* Right Sidebar */}
                 <div className="rightSidebar">
+                    {/* Spacer */}
                     <div className="spacer">
 
                     </div>
+                    {/* Add task */}
                     <div className="rightSidebarTop">
                         <h5>Add Task</h5>
                         <CreateTask />
@@ -107,14 +117,16 @@ function OverviewPage() {
                             ))}
                         </ul> */}
                     </div>
+                    {/* Urgent Tasks */}
                     <div className="rightSidebarMiddle">
-                        <h5>Urgent Tasks</h5>
+                        <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
+                        
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                     </div>
                     <div className="rightSidebarBottom">
-                        <h5>Notifications</h5>
+                        <h5>Notifications<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
                     </div>
                     
                 </div>
