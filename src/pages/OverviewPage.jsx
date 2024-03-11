@@ -97,7 +97,7 @@ function OverviewPage() {
                     <div className="spacer">
 
                     </div>
-                    <div className="top">
+                    <div className="rightSidebarTop">
                         <h5>Add Task</h5>
                         <CreateTask />
                         {/* <TaskForm addTask={addTask} />
@@ -107,13 +107,13 @@ function OverviewPage() {
                             ))}
                         </ul> */}
                     </div>
-                    <div className="middle">
+                    <div className="rightSidebarMiddle">
                         <h5>Urgent Tasks</h5>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                         <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
                     </div>
-                    <div className="bottom">
+                    <div className="rightSidebarBottom">
                         <h5>Notifications</h5>
                     </div>
                     

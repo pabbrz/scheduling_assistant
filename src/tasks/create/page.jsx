@@ -27,13 +27,13 @@ export default function CreateTask() {
           </div>
 
           <div className="d-flex">
-            <div className="mb-3 col-3 me-3">
+            <div className="mb-3 col-2 me-3">
               <label htmlFor="status" className="form-label">
                 Status
               </label>
               <select
                 name="status"
-                className="form-select"
+                className="form-select form-select-sm"
                 aria-label="Default select example"
               >
                 <option>Select Status</option>
@@ -43,13 +43,13 @@ export default function CreateTask() {
               </select>
             </div>
 
-            <div className="mb-3 col-3 me-3">
+            <div className="mb-3 col-2 me-3">
               <label htmlFor="assigned_user" className="form-label">
-                Assigned User
+               User
               </label>
               <select
                 name="assigned_user"
-                className="form-select"
+                className="form-select form-select-sm"
                 aria-label="Default select example"
               >
                 <option>Select User</option>
@@ -70,7 +70,7 @@ export default function CreateTask() {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-Success">
+          <button type="submit" className="btn btn-success">
             Create New Task
           </button>
         </form>
