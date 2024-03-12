@@ -48,14 +48,14 @@ function LandingPage() {
           <div className="rightContainer">
             <div className="centered-element">
               <div className="left-align">
-                <h3>Log in</h3>
+                <h3 id="logInText">Login</h3>
                 <div>
-                    <h4>Email</h4>
-                    <input class="form-control" type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    {/* <h4>Email</h4> */}
+                    <input id="emailInput" class="form-control placeholderColor" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <br></br>
-                    <h4>Password</h4>
-                    <input class="form-control" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                    <button type="button" class="btn btn-light" onClick={handleLogIn}>Log in</button>
+                    {/* <h4>Password</h4> */}
+                    <input id="passwordInput" class="form-control placeholderColor" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                    <button type="button" class="btn btn-light" id="logInButton" onClick={handleLogIn}>Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
                     <div><h8><a href="/Registration">Sign up!</a></h8></div>
                     <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>

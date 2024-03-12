@@ -1,6 +1,7 @@
 import '../stylesheets/OverviewPage.css'
 import CreateTask from '../tasks/create/page';
 import Badge from 'react-bootstrap/Badge'
+import { Link } from "react-router-dom";
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -48,7 +49,7 @@ function OverviewPage() {
                     </div>
                     {/* menu list */}
                     <div className="btn-group-vertical">
-                        <button type="button" className="btn btn-secondary menuButton"><img src={task} className="smallIcon" />Task Overview</button>
+                        <button type="button" className="btn btn-secondary menuButton"><img src={task} className="smallIcon" />Task List</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={school} className="smallIcon" />Classes</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Grades</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Teachers</button>
@@ -57,7 +58,7 @@ function OverviewPage() {
                     {/* preferences & log out */}
                     <div className="btn-group-vertical align-bottom">
                         <button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Preferences</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button>
+                        <Link to="/"><button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button></Link>
                     </div>
                 </div>
 

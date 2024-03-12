@@ -73,6 +73,7 @@ export default function CreateTask() {
               className="form-control"
               id="exampleInputTitle1"
               name="title"
+              style={{ width:"75%" }}
               {...register("taskName", { required: "Task name is required" })}
             />
           </div>
@@ -86,6 +87,7 @@ export default function CreateTask() {
               id="exampleInputDescription1"
               rows={6}
               name="description"
+              style={{ width:"75%" }}
               {...register("taskDescription")}
             ></textarea>
           </div>
@@ -108,7 +110,8 @@ export default function CreateTask() {
               </select>
             </div>
 
-            <div className="mb-3 col-2 me-3">
+            {/* don't think we need to select user */}
+            {/* <div className="mb-3 col-2 me-3">
               <label htmlFor="assigned_user" className="form-label">
                User
               </label>
@@ -119,7 +122,7 @@ export default function CreateTask() {
               >
                 <option>Select User</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="mb-3 col-3 me-3">
               <label htmlFor="deadline" className="form-label">
@@ -136,7 +139,7 @@ export default function CreateTask() {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" style={{ width:"75%" }}>
             Create New Task
           </button>
         </form>

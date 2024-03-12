@@ -101,7 +101,7 @@ function RegistrationPage() {
                 onSubmit={handleSubmit(onSubmit)}
                 id="signupform"
                 >
-                <h2>Sign Up</h2>
+                <h2 id="signUp">Sign Up</h2>
                 <br />
                 <div className="mb-3">
                     <label for="fname" className="form-label">
@@ -202,13 +202,13 @@ function RegistrationPage() {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary mr-1">
+                <button type="submit" className="btn btn-primary mr-1 regButton">
                     Sign Up
                 </button>
                 <button
                     type="button"
                     onClick={() => reset()}
-                    className="btn btn-secondary"
+                    className="btn btn-secondary regButton"
                 >
                     Reset
                 </button>
