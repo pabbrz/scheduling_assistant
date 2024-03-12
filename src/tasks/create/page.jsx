@@ -1,7 +1,69 @@
+import { useForm } from 'react-hook-form';
+import { auth } from '../../firebaseConfig.js';
+import app from '../../firebaseConfig.js';
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+
+
 export default function CreateTask() {
+
+    // get a reference to the firestore database
+    let db;
+    try {
+      db = getFirestore(app);
+      console.log('got firestore db reference');
+    }
+    catch (error) {
+      console.error('Error getting firestore db reference: ', error);
+    }
+
+    // get user id from firebase auth object
+    let userID;
+    try {
+      userID = auth.currentUser.uid;
+      console.log('User ID: ', userID);
+    }
+    catch (error) {
+      console.error('Error getting user ID: ', error);
+    }
+
+    // db.collection('users').doc(userID).collection('tasks').add(taskData);
+
+    // function to add a task to a user's 'tasks' sub collection
+    async function addTaskToUser(userID, taskData) {
+        if (!userID) {
+          console.error('User not logged in');
+          return;
+        }  
+      
+        try {
+          await addDoc(collection(db, 'users', userID, 'tasks'), taskData);
+          console.log('Task added');
+        }
+        catch (error) {
+          console.error('Error adding task: ', error);
+        }
+          
+    }
+   
+    // react useForm hook
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    
+    // function to handle form submission
+    const onSubmit = (data) => {
+        const taskData = {
+          taskName: data.taskName,
+          taskDescription: data.taskDescription,
+          taskStatus: data.taskStatus,
+          taskDueDate: data.taskDueDate
+        };
+        addTaskToUser(userID, taskData);
+        reset(); // clear form after submit
+      };
+ 
+
     return (
       <div>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
             <label for="exampleInputTitle1" className="form-label">
               Title
@@ -11,6 +73,7 @@ export default function CreateTask() {
               className="form-control"
               id="exampleInputTitle1"
               name="title"
+              {...register("taskName", { required: "Task name is required" })}
             />
           </div>
 
@@ -23,6 +86,7 @@ export default function CreateTask() {
               id="exampleInputDescription1"
               rows={6}
               name="description"
+              {...register("taskDescription")}
             ></textarea>
           </div>
 
@@ -35,6 +99,7 @@ export default function CreateTask() {
                 name="status"
                 className="form-select form-select-sm"
                 aria-label="Default select example"
+                {...register("taskStatus")}
               >
                 <option>Select Status</option>
                 <option value="not_started">Not started</option>
@@ -66,6 +131,7 @@ export default function CreateTask() {
                 name="deadline"
                 id="deadline"
                 min={new Date().toISOString().split("T")[0]}
+                {...register("taskDueDate")}
               />
             </div>
           </div>
