@@ -84,7 +84,7 @@ export default function CreateTask() {
             </label>
             <textarea
               className="form-control"
-              id="exampleInputDescription1"
+              id="description"
               rows={6}
               name="description"
               style={{ width:"75%" }}
@@ -93,7 +93,9 @@ export default function CreateTask() {
           </div>
 
           <div className="d-flex">
-            <div className="mb-3 col-2 me-3">
+            
+            {/* don't think we need to select user or status ? */}
+            {/* <div className="mb-3 col-2 me-3">
               <label htmlFor="status" className="form-label">
                 Status
               </label>
@@ -108,21 +110,23 @@ export default function CreateTask() {
                 <option value="in_progress">In Progress</option>
                 <option value="completed">Completed</option>
               </select>
-            </div>
+            </div> */}
 
-            {/* don't think we need to select user */}
-            {/* <div className="mb-3 col-2 me-3">
-              <label htmlFor="assigned_user" className="form-label">
-               User
+            <div className="mb-3 col-2 me-3">
+              <label htmlFor="priority" className="form-label">
+               Priority
               </label>
               <select
-                name="assigned_user"
+                name="prioriy"
                 className="form-select form-select-sm"
                 aria-label="Default select example"
+                {...register("taskPriority")}
               >
-                <option>Select User</option>
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
               </select>
-            </div> */}
+            </div>
 
             <div className="mb-3 col-3 me-3">
               <label htmlFor="deadline" className="form-label">

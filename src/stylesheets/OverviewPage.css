@@ -121,7 +121,7 @@
     align-items: center;
 }
 
-.form-control {
+.overviewPageContainer.form-control {
     max-height:2rem;
     width:auto;
 }
@@ -204,6 +204,16 @@
     height: 30vh;
     max-width: 20vw;
     margin-bottom: 30px;
+}
+
+ /* CreateTask component styles for overview page */
+ #description {
+    max-height:2rem;
+    width:auto;
+}
+#deadline {
+    max-height:2rem;
+    width:auto;
 }
 
 /* .createTaskForm {

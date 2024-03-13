@@ -14,7 +14,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 {/* Image imports */}
 import task from "../assets/task.png"
-import school from "../assets/school.png"
+import calendar from "../assets/calendar.png"
 import grades from "../assets/grades.png"
 import teachers from "../assets/teachers.png"
 import notes from "../assets/notes.png"
@@ -25,24 +25,14 @@ import mail from "../assets/mail.svg"
 import message from "../assets/message.svg"
 import taskItem from "../assets/taskItem.svg"
 
-{/* Add task */}
-// import { useState } from 'react'
-// import TaskForm from '../components/TaskForm'
-// const [tasks, setTasks] = useState([]);
-// const addTask = (task) => {
-// setTasks([...tasks, task]);
-// };
-
-
 
 function OverviewPage() {
     
+    // code for dynamically changing the middle portion of the page based on menu selection
     const [menuSelection, setMenuSelection] = useState('calendar');
-    
     const handleMenuSelection = (value) => {
         setMenuSelection(value);
     }
-   
     const menuMap = {
         'taskList': 'TaskListPage',
         'calendar': <div className="calendar">
@@ -53,6 +43,13 @@ function OverviewPage() {
                             themeSystem="bootstrap"
                         />
                     </div>
+    }
+
+    // urgent tasks list
+    const [urgentTasks, setUrgentTasks] = useState(["task1", "task2", "task3"]);
+    const handleTaskChecked = (index) => {
+        console.log("task checked: ", index);
+        //TODO remove task from urgentTasks, update firebase, and update state.
     }
 
     return(
@@ -70,7 +67,7 @@ function OverviewPage() {
                     {/* menu list */}
                     <div className="btn-group-vertical">
                         <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("taskList")}><img src={task} className="smallIcon" />Task List</button>
-                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("calendar")}><img src={school} className="smallIcon" />Calendar</button>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("calendar")}><img src={calendar} className="smallIcon" />Calendar</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Grades</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Teachers</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Notes</button>
@@ -80,7 +77,7 @@ function OverviewPage() {
                         <button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Preferences</button>
                         <Link to="/"><button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button></Link>
                     </div>
-                    </div>
+                </div>
 
                 {/* Middle Portion */}
                 <div className="middle">
@@ -135,11 +132,18 @@ function OverviewPage() {
                     {/* Urgent Tasks */}
                     <div className="rightSidebarMiddle">
                         <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
-                        
-                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
-                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
-                        <button className="iconButton"><img className="iconImg" src={taskItem} /></button>
+                        <div class="form-check">
+                            {urgentTasks.map((task, index) => (
+                                <div key={index}>
+                                    <input class="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(index)}></input>
+                                    <label class="form-check-label" for={`flexCheckDefault${index}`}>
+                                        {task}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
                     </div>
+                    {/* Notifications */}
                     <div className="rightSidebarBottom">
                         <h5>Notifications<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
                     </div>
