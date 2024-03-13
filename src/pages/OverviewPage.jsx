@@ -2,6 +2,7 @@ import '../stylesheets/OverviewPage.css'
 import CreateTask from '../tasks/create/page';
 import Badge from 'react-bootstrap/Badge'
 import { Link } from "react-router-dom";
+import { useState } from 'react'    
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -35,6 +36,25 @@ import taskItem from "../assets/taskItem.svg"
 
 
 function OverviewPage() {
+    
+    const [menuSelection, setMenuSelection] = useState('calendar');
+    
+    const handleMenuSelection = (value) => {
+        setMenuSelection(value);
+    }
+   
+    const menuMap = {
+        'taskList': 'TaskListPage',
+        'calendar': <div className="calendar">
+                        <FullCalendar
+                            plugins={[dayGridPlugin]}
+                            initialView="dayGridMonth"
+                            weekends={true}
+                            themeSystem="bootstrap"
+                        />
+                    </div>
+    }
+
     return(
         <>
             <div className="overviewPageContainer">
@@ -49,8 +69,8 @@ function OverviewPage() {
                     </div>
                     {/* menu list */}
                     <div className="btn-group-vertical">
-                        <button type="button" className="btn btn-secondary menuButton"><img src={task} className="smallIcon" />Task List</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={school} className="smallIcon" />Classes</button>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("taskList")}><img src={task} className="smallIcon" />Task List</button>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("calendar")}><img src={school} className="smallIcon" />Calendar</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Grades</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Teachers</button>
                         <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Notes</button>
@@ -60,7 +80,7 @@ function OverviewPage() {
                         <button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Preferences</button>
                         <Link to="/"><button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button></Link>
                     </div>
-                </div>
+                    </div>
 
                 {/* Middle Portion */}
                 <div className="middle">
@@ -88,14 +108,8 @@ function OverviewPage() {
                     {/* Middle Main */}
                     <div className="middleMain">
                         <div className="scrollableContent">
-                            <div className="calendar">
-                                <FullCalendar
-                                    plugins={[dayGridPlugin]}
-                                    initialView="dayGridMonth"
-                                    weekends={true}
-                                    themeSystem="bootstrap"
-                                />
-                            </div>
+                            {/* dynamically select what renders in middle based on menu */}
+                            {menuMap[menuSelection]}
                         </div>
                     </div>
 
