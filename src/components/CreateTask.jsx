@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { auth } from '../../firebaseConfig.js';
-import app from '../../firebaseConfig.js';
+import { auth } from '../firebaseConfig.js';
+import app from '../firebaseConfig.js';
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 

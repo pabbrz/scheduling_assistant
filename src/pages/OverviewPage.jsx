@@ -1,5 +1,5 @@
 import '../stylesheets/OverviewPage.css'
-import CreateTask from '../tasks/create/page';
+import CreateTask from '../components/CreateTask';
 import Badge from 'react-bootstrap/Badge'
 import { Link } from "react-router-dom";
 import { useState } from 'react'    
