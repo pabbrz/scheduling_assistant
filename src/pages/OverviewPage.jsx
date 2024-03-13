@@ -74,7 +74,8 @@ function OverviewPage() {
                     </div>
                     {/* preferences & log out */}
                     <div className="btn-group-vertical align-bottom">
-                        <button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Preferences</button>
+                        <Link to="/profile"><button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Profile</button></Link>
+{/* TODO: code to actually log out user */}
                         <Link to="/"><button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button></Link>
                     </div>
                 </div>
