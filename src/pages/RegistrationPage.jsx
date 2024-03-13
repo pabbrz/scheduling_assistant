@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { auth } from '../firebaseConfig';
 import app from '../firebaseConfig';
-import '../stylesheets/RegistrationPage2.css'
+import '../stylesheets/RegistrationPage.css'
 import peopleWorking from "../assets/peopleWorking.png"
 const loginLink = "/Login";
 import 'firebase/auth';
