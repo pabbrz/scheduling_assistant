@@ -4,6 +4,7 @@ import Badge from 'react-bootstrap/Badge'
 import { Link } from "react-router-dom";
 import { useState } from 'react'
 import TaskList from '../components/TaskList'
+import avatar from "../assets/Nola.jpg";
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -66,8 +67,9 @@ function OverviewPage() {
                     {/* welcome pill */}
                     <div className="welcomePillDiv">
                         <span className="badge badge-pill badge-secondary welcomePill">
-                            <div className="welcomePillPhoto"></div>
-                            <p><span id="welcomePillText">Welcome</span><span>someone@my.unt.edu</span></p>
+                            <img src={avatar} className="rounded-circle" id="avatar" alt="Avatar" />   
+                            {/* <div className="welcomePillPhoto"></div> */}
+                            <p id="welcomePillTextArea"><span id="welcomePillText">Welcome</span><span>Joshua</span></p>
                         </span>
                     </div>
                     {/* menu list */}
