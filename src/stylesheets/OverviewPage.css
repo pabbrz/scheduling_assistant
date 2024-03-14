@@ -122,7 +122,7 @@
 /******************** Middle portion and children ********************/
 .middle {
     /* flex-grow: 1; */
-    width: 68vw;
+    width: 73vw;
     height: 100vh;
     background-color: #161616;
 }
@@ -232,7 +232,7 @@
 /******************** Right sidebar and children ********************/
 .rightSidebar {
     /* flex-grow: 1; */
-    max-width: 20vw;
+    max-width: 15vw;
     height: 100vh;
     background-color: #2b2b2b;
     display: flex;
