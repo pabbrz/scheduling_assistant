@@ -51,10 +51,10 @@ export default function CreateTask() {
     // function to handle form submission
     const onSubmit = (data) => {
         const taskData = {
-          taskName: data.taskName,
-          taskDescription: data.taskDescription,
-          taskStatus: data.taskStatus,
-          taskDueDate: data.taskDueDate
+          name: data.name,
+          description: data.description,
+          priority: data.priority,
+          dueDate: data.dueDate
         };
         addTaskToUser(userID, taskData);
         reset(); // clear form after submit
@@ -65,21 +65,21 @@ export default function CreateTask() {
       <div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-3">
-            <label for="exampleInputTitle1" className="form-label">
-              Title
+            <label htmlFor="name" className="form-label">
+              Name
             </label>
             <input
               type="text"
               className="form-control"
-              id="exampleInputTitle1"
-              name="title"
+              id="name"
+              name="name"
               style={{ width:"75%" }}
-              {...register("taskName", { required: "Task name is required" })}
+              {...register("name", { required: "Task name is required" })}
             />
           </div>
 
           <div className="mb-3">
-            <label for="exampleInputDescription" className="form-label">
+            <label htmlFor="description" className="form-label">
               Description
             </label>
             <textarea
@@ -88,7 +88,7 @@ export default function CreateTask() {
               rows={6}
               name="description"
               style={{ width:"75%" }}
-              {...register("taskDescription")}
+              {...register("description")}
             ></textarea>
           </div>
 
@@ -118,9 +118,10 @@ export default function CreateTask() {
               </label>
               <select
                 name="prioriy"
+                id="priority" 
                 className="form-select form-select-sm"
                 aria-label="Default select example"
-                {...register("taskPriority")}
+                {...register("priority")}
               >
                 <option>Low</option>
                 <option>Medium</option>
@@ -129,16 +130,16 @@ export default function CreateTask() {
             </div>
 
             <div className="mb-3 col-3 me-3">
-              <label htmlFor="deadline" className="form-label">
-                Deadline
+              <label htmlFor="dueDate" className="form-label">
+                DueDate
               </label>
               <input
                 type="date"
                 className="form-control"
-                name="deadline"
-                id="deadline"
+                name="dueDate"
+                id="dueDate"
                 min={new Date().toISOString().split("T")[0]}
-                {...register("taskDueDate")}
+                {...register("dueDate")}
               />
             </div>
           </div>

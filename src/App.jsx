@@ -5,6 +5,8 @@ import OverviewPage from './pages/OverviewPage';
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function App() {
   //const [count, setCount] = useState(0)

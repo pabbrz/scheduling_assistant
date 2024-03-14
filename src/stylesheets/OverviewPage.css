@@ -180,6 +180,24 @@
     margin: 20px 20px;
 }
 
+.taskList {
+    margin: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border: 2px solid red;
+}
+
+.taskListInput {
+    font-size: 24px;
+}
+
+.taskListLabel {
+    font-size: 24px;
+    color: white;
+    margin-left: 10px;
+}
+
 /******************** Right sidebar and children ********************/
 .rightSidebar {
     /* flex-grow: 1; */
@@ -207,12 +225,12 @@
     margin-bottom: 30px;
 }
 
- /* CreateTask component styles for overview page */
- #description {
+/* CreateTask component styles for overview page */
+#description {
     max-height:2rem;
     width:auto;
 }
-#deadline {
+#dueDate {
     max-height:2rem;
     width:auto;
 }
@@ -227,9 +245,7 @@
     background-color: greenyellow;
 } */
 
-.btn {
-    color: white;
-}
+
 
 .rightSidebarMiddle {
     display: flex;

@@ -2,7 +2,8 @@ import '../stylesheets/OverviewPage.css'
 import CreateTask from '../components/CreateTask';
 import Badge from 'react-bootstrap/Badge'
 import { Link } from "react-router-dom";
-import { useState } from 'react'    
+import { useState } from 'react'
+import TaskList from '../components/TaskList'
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -28,13 +29,20 @@ import taskItem from "../assets/taskItem.svg"
 
 function OverviewPage() {
     
+    // tasks for displaying in middle of page
+    const [tasks, setTasks] = useState([{name: "task1", description: "description1", priority: "low", dueDate: "dueDate1"}, {name: "task2", description: "description2", priority: "medium", dueDate: "dueDate2"}, {name: "task3", description: "description3", priority: "high", dueDate: "dueDate3"}]);
+    const handleTaskChecked = (index) => {
+        console.log("task checked: ", index);
+        //TODO remove task from urgentTasks, update firebase, and update state.
+    }
+
     // code for dynamically changing the middle portion of the page based on menu selection
     const [menuSelection, setMenuSelection] = useState('calendar');
     const handleMenuSelection = (value) => {
         setMenuSelection(value);
     }
     const menuMap = {
-        'taskList': 'TaskListPage',
+        'taskList': <TaskList tasks={tasks} handleTaskChecked={handleTaskChecked} />,
         'calendar': <div className="calendar">
                         <FullCalendar
                             plugins={[dayGridPlugin]}
@@ -47,10 +55,8 @@ function OverviewPage() {
 
     // urgent tasks list
     const [urgentTasks, setUrgentTasks] = useState(["task1", "task2", "task3"]);
-    const handleTaskChecked = (index) => {
-        console.log("task checked: ", index);
-        //TODO remove task from urgentTasks, update firebase, and update state.
-    }
+    const [urgentTasksCount, setUrgentTasksCount] = useState(urgentTasks.length);
+    
 
     return(
         <>
@@ -132,7 +138,7 @@ function OverviewPage() {
                     </div>
                     {/* Urgent Tasks */}
                     <div className="rightSidebarMiddle">
-                        <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
+                        <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>{urgentTasksCount}</Badge></h5>
                         <div class="form-check">
                             {urgentTasks.map((task, index) => (
                                 <div key={index}>
