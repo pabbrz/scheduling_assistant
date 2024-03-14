@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { auth } from '../firebaseConfig.js';
 import app from '../firebaseConfig.js';
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore, firebase } from "firebase/firestore";
 
 
 export default function CreateTask() {
@@ -19,7 +19,7 @@ export default function CreateTask() {
     // get user id from firebase auth object
     let userID;
     try {
-      userID = auth.currentUser.uid;
+      userID = auth.currentUser.uid; //tried firebase.auth().currentUser.uid but it didn't work either, getting NULL
       console.log('User ID: ', userID);
     }
     catch (error) {

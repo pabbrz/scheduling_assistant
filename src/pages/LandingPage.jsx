@@ -22,7 +22,7 @@ function LandingPage() {
             console.log(user);
             setError(null);
 
-            window.location.href = '/homepage';
+            window.location.href = '/overview';
         })
         .catch((error) => {
             const errorCode = error.code;

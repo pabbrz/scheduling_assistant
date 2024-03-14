@@ -27,8 +27,34 @@ import mail from "../assets/mail.svg"
 import message from "../assets/message.svg"
 import taskItem from "../assets/taskItem.svg"
 
+// firebase
+// import { getFirestore, collection, addDoc, doc, getDoc, getDocs, updateDoc, increment, firebase } from 'firebase/firestore';
+// import app from '../firebaseConfig';
 
 function OverviewPage() {
+    // // firestore stuff
+    // const userID = firebase.auth().currentUser.uid;
+    // const db = getFirestore(app);
+
+    // // Function to fetch documents from a specific collection
+    // const fetchCollectionData = async (collectionName) => {
+    //     try {
+    //     const collectionRef = collection(db, collectionName);
+    //     const querySnapshot = await getDocs(collectionRef);
+    //     querySnapshot.forEach((doc) => {
+    //         console.log(`${doc.id} =>`, doc.data());
+    //     });
+    //     } catch (error) {
+    //     console.error("Error fetching collection data:", error);
+    //     }
+    // };
+
+    // fetchCollectionData('users');
+
+
+
+
+
     
     // tasks for displaying in middle of page
     const [tasks, setTasks] = useState([{name: "task1", description: "description1", priority: "low", dueDate: "dueDate1"}, {name: "task2", description: "description2", priority: "medium", dueDate: "dueDate2"}, {name: "task3", description: "description3", priority: "high", dueDate: "dueDate3"}]);
