@@ -15,7 +15,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import app from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, increment } from 'firebase/firestore';
 import { auth } from '../firebaseConfig';
 
 const loginLink = "/Login";
@@ -68,7 +68,7 @@ function RegistrationPage() {
       .then(async(userCredential) => {
           // Signed in
           const user = userCredential.user;
-          await addDoc(collection(db, "users"), {                // await setDoc(doc(db, "users", user.uid), {
+        await setDoc(doc(db, "users", user.uid), {  ///await addDoc(collection(db, "users"),{
             email: user.email,
             // password_hash: "******************************", // firebase authentication handles passwords securely from what i've read
             user_id: user.uid,
@@ -113,14 +113,14 @@ function RegistrationPage() {
                 <h2 id="signUp">Sign Up</h2>
                 <br />
                 <div className="mb-3">
-                    <label for="fname" className="form-label">
+                    <label htmlFor="fname" className="form-label">
                     First Name
                     </label>
                     <input
                     type="text"
                     name="fname"
                     value={fname}
-                    autocomplete="off"
+                    autoComplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("fname")}
                     className={`form-control ${errors.fname ? "is-invalid" : ""}`}
@@ -131,7 +131,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="lname" className="form-label">
+                    <label htmlFor="lname" className="form-label">
                     Last Name
                     </label>
                     <input
@@ -149,7 +149,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="email" className="form-label">
+                    <label htmlFor="email" className="form-label">
                     Email address
                     </label>
                     <input
@@ -170,7 +170,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="password" className="form-label">
+                    <label htmlFor="password" className="form-label">
                     Password
                     </label>
                     <input
@@ -192,7 +192,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="password2" className="form-label">
+                    <label htmlFor="password2" className="form-label">
                     Confirm Password
                     </label>
                     <input

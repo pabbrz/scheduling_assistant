@@ -55,11 +55,11 @@ function LandingPage() {
                 <h3 id="logInText">Login</h3>
                 <div>
                     {/* <h4>Email</h4> */}
-                    <input id="emailInput" class="form-control placeholderColor" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    <input id="emailInput" className="form-control placeholderColor" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <br></br>
                     {/* <h4>Password</h4> */}
-                    <input id="passwordInput" class="form-control placeholderColor" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                    <button type="button" class="btn btn-light" id="logInButton" onClick={handleLogIn}>Log in</button>
+                    <input id="passwordInput" className="form-control placeholderColor" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                    <button type="button" className="btn btn-light" id="logInButton" onClick={handleLogIn}>Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
                     <div><h8><a href="/Registration">Sign up!</a></h8></div>
                     <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>

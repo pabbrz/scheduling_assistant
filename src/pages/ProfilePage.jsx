@@ -27,7 +27,7 @@ const ProfilePage = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault();                             // TODO: Add functionality to update user info in database
     };
 
     return (
