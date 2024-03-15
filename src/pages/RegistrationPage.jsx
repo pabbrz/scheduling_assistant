@@ -61,12 +61,14 @@ function RegistrationPage() {
       .then(async(userCredential) => {
           // Signed in
           const user = userCredential.user;
-          await addDoc(collection(db, "users"), {
+          await addDoc(collection(db, "users"), {                // await setDoc(doc(db, "users", user.uid), {
             email: user.email,
             password_hash: "******************************",
             user_id: user.uid,
-            username: fname+' '+lname
-          })
+            fname: fname,
+            lname: lname,
+            username: fname + ' ' + lname
+          });
           console.log(user);
           // setShowSignUp(!showSignUp);
           // ...

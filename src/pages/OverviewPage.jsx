@@ -170,8 +170,8 @@ function OverviewPage() {
                         <div class="form-check">
                             {urgentTasks.map((task, index) => (
                                 <div key={index}>
-                                    <input class="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(index)}></input>
-                                    <label class="form-check-label" for={`flexCheckDefault${index}`}>
+                                    <input className="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(index)}></input>
+                                    <label className="form-check-label" htmlFor={`flexCheckDefault${index}`}>
                                         {task}
                                     </label>
                                 </div>

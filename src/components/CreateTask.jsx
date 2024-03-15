@@ -1,49 +1,89 @@
 import { useForm } from 'react-hook-form';
+import { useState, useEffect } from 'react';
 import { auth } from '../firebaseConfig.js';
 import app from '../firebaseConfig.js';
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { doc, getDoc, addDoc, collection, getFirestore } from "firebase/firestore";
+import { useAuth } from '../AuthContext';
+
 
 
 export default function CreateTask() {
+    const { currentUser } = useAuth();
+    const userID = currentUser.uid;
+    const db = getFirestore(app);
+
+    const [fname, setFname] = useState('');
+
+    // get user's first name from firestore, runs again when user changes
+    useEffect(() => {
+      const fetchUserData = async () => {
+        if (currentUser) {
+          const userRef = doc(db, 'users', currentUser.uid);
+          const userSnap = await getDoc(userRef);
+  
+          if (userSnap.exists()) {
+            setFname(userSnap.data().fname);
+          } else {
+            console.log('Doc does not exist!');
+          }
+        }
+      };
+    fetchUserData();
+    }, [currentUser]);
+
+    // const docRef = doc(db, "cities", "SF");
+    // const docSnap = await getDoc(docRef);
+
+    // if (docSnap.exists()) {
+    //   console.log("Document data:", docSnap.data());
+    // } else {
+    //   // docSnap.data() will be undefined in this case
+    //   console.log("No such document!");
+    // }
+    
+    console.log('Current user from auth context: ', currentUser);
+    console.log('UserID from auth context: ', userID);
+    console.log('Fname from auth context new test: ', fname);
+  
 
     // get a reference to the firestore database
-    let db;
-    try {
-      db = getFirestore(app);
-      console.log('got firestore db reference');
-    }
-    catch (error) {
-      console.error('Error getting firestore db reference: ', error);
-    }
+    // let db;
+    // try {
+    //   db = getFirestore(app);
+    //   console.log('got firestore db reference');
+    // }
+    // catch (error) {
+    //   console.error('Error getting firestore db reference: ', error);
+    // }
 
-    // get user id from firebase auth object
-    let userID;
-    try {
-      userID = auth.currentUser.uid; //tried firebase.auth().currentUser.uid but it didn't work either, getting NULL
-      console.log('User ID: ', userID);
-    }
-    catch (error) {
-      console.error('Error getting user ID: ', error);
-    }
+    // // get user id from firebase auth object
+    // let userID;
+    // try {
+    //   userID = auth.currentUser.uid; //tried firebase.auth().currentUser.uid but it didn't work either, getting NULL
+    //   console.log('User ID: ', userID);
+    // }
+    // catch (error) {
+    //   console.error('Error getting user ID: ', error);
+    // }
 
     // db.collection('users').doc(userID).collection('tasks').add(taskData);
 
     // function to add a task to a user's 'tasks' sub collection
-    async function addTaskToUser(userID, taskData) {
-        if (!userID) {
-          console.error('User not logged in');
-          return;
-        }  
+    // async function addTaskToUser(userID, taskData) {
+    //     if (!userID) {
+    //       console.error('User not logged in');
+    //       return;
+    //     }  
       
-        try {
-          await addDoc(collection(db, 'users', userID, 'tasks'), taskData);
-          console.log('Task added');
-        }
-        catch (error) {
-          console.error('Error adding task: ', error);
-        }
+    //     try {
+    //       await addDoc(collection(db, 'users', userID, 'tasks'), taskData);
+    //       console.log('Task added');
+    //     }
+    //     catch (error) {
+    //       console.error('Error adding task: ', error);
+    //     }
           
-    }
+    // }
    
     // react useForm hook
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
