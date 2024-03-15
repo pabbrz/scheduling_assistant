@@ -1,36 +1,38 @@
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
-import { auth } from '../firebaseConfig.js';
-import app from '../firebaseConfig.js';
-import { doc, getDoc, addDoc, collection, getFirestore } from "firebase/firestore";
-import { useAuth } from '../AuthContext';
 
+import db from '../firebaseConfig.js';
+import { doc, getDoc, addDoc, collection } from "firebase/firestore";
+
+import { useAuth } from '../AuthContext';
+import useUserData from '../firebaseServices';
 
 
 export default function CreateTask() {
+    
     const { currentUser } = useAuth();
     const userID = currentUser.uid;
-    const db = getFirestore(app);
+    const userData = useUserData(userID);
 
-    const [fname, setFname] = useState('');
+    console.log('userData: ', userData);
 
-    // get user's first name from firestore, runs again when user changes
-    useEffect(() => {
-      const fetchUserData = async () => {
-        if (currentUser) {
-          const userRef = doc(db, 'users', currentUser.uid);
-          const userSnap = await getDoc(userRef);
+    // // get user's first name from firestore, runs again when user changes
+    // useEffect(() => {
+    //   const fetchUserData = async () => {
+    //     if (currentUser) {
+    //       const userRef = doc(db, 'users', currentUser.uid);
+    //       const userSnap = await getDoc(userRef);
   
-          if (userSnap.exists()) {
-            setFname(userSnap.data().fname);
-          } else {
-            console.log('Doc does not exist!');
-          }
-        }
-      };
-    fetchUserData();
-    }, [currentUser]);
+    //       if (userSnap.exists()) {
+    //         setFname(userSnap.data().fname);
+    //       } else {
+    //         console.log('Doc does not exist!');
+    //       }
+    //     }
+    //   };
+    // fetchUserData();
+    // }, [currentUser]);
 
     // const docRef = doc(db, "cities", "SF");
     // const docSnap = await getDoc(docRef);
@@ -42,9 +44,9 @@ export default function CreateTask() {
     //   console.log("No such document!");
     // }
     
-    console.log('Current user from auth context: ', currentUser);
-    console.log('UserID from auth context: ', userID);
-    console.log('Fname from auth context new test: ', fname);
+  
+    
+    // console.log('Fname from auth context new test: ', userData.fname);
   
 
     // get a reference to the firestore database

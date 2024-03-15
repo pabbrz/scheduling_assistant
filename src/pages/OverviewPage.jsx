@@ -167,7 +167,7 @@ function OverviewPage() {
                     {/* Urgent Tasks */}
                     <div className="rightSidebarMiddle">
                         <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>{urgentTasksCount}</Badge></h5>
-                        <div class="form-check">
+                        <div className="form-check">
                             {urgentTasks.map((task, index) => (
                                 <div key={index}>
                                     <input className="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(index)}></input>
