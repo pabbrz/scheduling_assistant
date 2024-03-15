@@ -1,19 +1,24 @@
+import '../stylesheets/RegistrationPage.css'
+import peopleWorking from "../assets/peopleWorking.png"
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
-import { auth } from '../firebaseConfig';
-import app from '../firebaseConfig';
-import '../stylesheets/RegistrationPage.css'
-import peopleWorking from "../assets/peopleWorking.png"
-const loginLink = "/Login";
+// import bcrypt from 'bcrypt';
+
+{/* Firebase imports */}
 import 'firebase/auth';
 import 'firebase/firestore';
-// import bcrypt from 'bcrypt';
+import app from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { getFirestore, collection, addDoc, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { auth } from '../firebaseConfig';
+
+const loginLink = "/Login";
 
 //Sign up function allows the user to set up their name(first and last),
 //their number, email, and password for their new account
@@ -22,6 +27,8 @@ function RegistrationPage() {
   const [password, setPassword] = useState('');
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
+
+  let navigate = useNavigate();
   
   const db = getFirestore(app);
   const userCollectionRef = collection(db, 'users');
@@ -63,7 +70,7 @@ function RegistrationPage() {
           const user = userCredential.user;
           await addDoc(collection(db, "users"), {                // await setDoc(doc(db, "users", user.uid), {
             email: user.email,
-            password_hash: "******************************",
+            // password_hash: "******************************", // firebase authentication handles passwords securely from what i've read
             user_id: user.uid,
             fname: fname,
             lname: lname,
@@ -72,7 +79,7 @@ function RegistrationPage() {
           console.log(user);
           // setShowSignUp(!showSignUp);
           // ...
-          window.location.href = '/';
+          navigate('/'); // navigate to login page
       })
       .catch((error) => {
           const errorCode = error.code;

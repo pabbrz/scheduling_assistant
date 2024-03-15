@@ -1,17 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../stylesheets/LandingPage.css'
 import peopleWorking from "../assets/peopleWorking.png"
-import { Link } from "react-router-dom";
+
+import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from 'react';
+
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import Snackbar from '../components/Snackbar';
 
+import Snackbar from '../components/Snackbar';
 
 function LandingPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  let navigate = useNavigate();
 
   const handleLogIn = async (e) => {
         e.preventDefault();
@@ -22,7 +26,7 @@ function LandingPage() {
             console.log(user);
             setError(null);
 
-            window.location.href = '/overview';
+            navigate('/overview');
         })
         .catch((error) => {
             const errorCode = error.code;
