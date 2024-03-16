@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@ericz1803/react-google-calendar": "^4.3.2",
     "@fullcalendar/daygrid": "^6.1.11",
     "@fullcalendar/interaction": "^6.1.11",
     "@fullcalendar/react": "^6.1.11",
@@ -18,7 +20,11 @@
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.2",
+    "dotenv": "^16.4.5",
+    "dotenv-webpack": "^8.0.1",
     "firebase": "^10.7.2",
+    "gaxios": "^6.3.0",
+    "googleapis": "^133.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.0",
