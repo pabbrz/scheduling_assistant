@@ -1,8 +1,9 @@
 import '../stylesheets/OverviewPage.css'
 import CreateTask from '../components/CreateTask';
 import Badge from 'react-bootstrap/Badge'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react'
+import { useAuth } from '../AuthContext'
 import TaskList from '../components/TaskList'
 import avatar from "../assets/Nola.jpg";
 
@@ -51,8 +52,19 @@ function OverviewPage() {
 
     // fetchCollectionData('users');
 
+    let navigate = useNavigate();
 
-
+    // handles logging out
+    const { logOut } = useAuth();
+    function handleLogOut() {
+        console.log("logging out");
+        logOut().then(() => {
+            console.log("logged out");
+            navigate('/');
+        }).catch((error) => {
+            console.log("error logging out: ", error);
+        });
+    }
 
 
     
@@ -102,15 +114,15 @@ function OverviewPage() {
                     <div className="btn-group-vertical">
                         <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("taskList")}><img src={task} className="smallIcon" />Task List</button>
                         <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("calendar")}><img src={calendar} className="smallIcon" />Calendar</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Grades</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Teachers</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Notes</button>
+                        <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Today?</button>
+                        <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Completed?</button>
+                        <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Trash?</button>
                     </div>
                     {/* preferences & log out */}
                     <div className="btn-group-vertical align-bottom">
                         <Link to="/profile"><button type="button" className="btn btn-secondary menuButton"><img src={preferences} className="smallIcon" />Profile</button></Link>
 {/* TODO: code to actually log out user */}
-                        <Link to="/"><button type="button" className="btn btn-secondary menuButton"><img src={logout} className="smallIcon" />Log out</button></Link>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleLogOut()}><img src={logout} className="smallIcon" />Log out</button>
                     </div>
                 </div>
 

@@ -62,7 +62,7 @@ function LandingPage() {
                     <button type="button" className="btn btn-light" id="logInButton" onClick={handleLogIn}>Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
                     <div><h8><a href="/Registration">Sign up!</a></h8></div>
-                    <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>
+                    {/* <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link> */}
                 </div>
   
                 <div>

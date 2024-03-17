@@ -12,6 +12,10 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  function logOut() {
+    return auth.signOut();
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
@@ -23,6 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     currentUser,
+    logOut
   };
 
   return (

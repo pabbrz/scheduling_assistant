@@ -16,7 +16,7 @@ import 'firebase/firestore';
 import app from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, increment } from 'firebase/firestore';
-import { auth } from '../firebaseConfig';
+import { auth, db } from '../firebaseConfig';
 
 const loginLink = "/Login";
 
@@ -30,14 +30,14 @@ function RegistrationPage() {
 
   let navigate = useNavigate();
   
-  const db = getFirestore(app);
+//   const db = getFirestore(app);   // imported now from firebaseConfig.js
   const userCollectionRef = collection(db, 'users');
   
 //   const generatePasswordHash = async (password) => {
 //     // Generate a salt to add randomness to the hash
 //     const saltRounds = 10;
 //     const salt = await bcrypt.genSalt(saltRounds);
-  
+//   const db = getFirestore(app);   // imported now from firebaseConfig.js 
 //     // Generate the hash using the salt and the password
 //     const hash = await bcrypt.hash(password, salt);
   
