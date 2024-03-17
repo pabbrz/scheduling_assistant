@@ -230,6 +230,10 @@
     color: white;
 }
 
+.fc .fc-day-today {
+    background-color: #d6123c96  !important;
+}
+
 .taskList {
     margin: 20px 20px;
     display: flex;
