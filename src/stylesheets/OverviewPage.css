@@ -217,6 +217,19 @@
     margin: 20px 20px;
 }
 
+/* .fc is FullCalendar */
+.fc-toolbar-title {
+    color: white;
+}
+
+.fc-day-header, .fc-col-header-cell {
+    color: white;
+}
+
+.fc .fc-daygrid-day .fc-daygrid-day-number {
+    color: white;
+}
+
 .taskList {
     margin: 20px 20px;
     display: flex;

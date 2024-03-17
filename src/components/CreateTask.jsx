@@ -17,6 +17,8 @@ export default function CreateTask() {
 
     console.log('userData: ', userData);
 
+    // console.log('fname: ', userData.fname);
+
     // // get user's first name from firestore, runs again when user changes
     // useEffect(() => {
     //   const fetchUserData = async () => {

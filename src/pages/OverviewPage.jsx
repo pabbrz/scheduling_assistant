@@ -12,6 +12,7 @@ import avatar from "../assets/Nola.jpg";
 // import 'react-calendar/dist/Calendar.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 // import 'path/to/superhero/bootstrap.min.css';
 
 
@@ -84,10 +85,12 @@ function OverviewPage() {
         'taskList': <TaskList tasks={tasks} handleTaskChecked={handleTaskChecked} />,
         'calendar': <div className="calendar">
                         <FullCalendar
-                            plugins={[dayGridPlugin]}
+                            plugins={[dayGridPlugin, bootstrap5Plugin]}
                             initialView="dayGridMonth"
                             weekends={true}
-                            themeSystem="bootstrap"
+                            themeSystem="bootstrap5"
+                            // contentHeight={"auto"}
+                            aspectRatio={1.5}
                         />
                     </div>
     }

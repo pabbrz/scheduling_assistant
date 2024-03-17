@@ -6,6 +6,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import '@fullcalendar/bootstrap5/index.js';
 
 
 function App() {
