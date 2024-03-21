@@ -1,5 +1,5 @@
 // Import the addTask function from the Firestore functions file
-import { addTask } from './yourFirestoreFunctionsFile'; // Import the functions you want to test
+import { addTask } from './ourFirestoreFunctionsFile'; // Import the functions you want to test
 
 // Import necessary Firestore functions
 import { getFirestore, collection, addDoc} from 'firebase/firestore'; // Import necessary Firestore functions
