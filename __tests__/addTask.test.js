@@ -9,7 +9,7 @@ jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(), // Mock getFirestore function
   collection: jest.fn(), // Mock collection function
   addDoc: jest.fn(), // Mock addDoc function
-  doc: jest.fn(), // Mock doc function
+  doc: jest.fn() // Mock doc function
 }));
 
 // Describe block for testing Firestore functions
