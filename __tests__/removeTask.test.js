@@ -8,7 +8,7 @@ import { getFirestore, doc, deleteDoc } from 'firebase/firestore'; // Import nec
 jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(), // Mock getFirestore function
   doc: jest.fn(), // Mock doc function
-  deleteDoc: jest.fn(), // Mock deleteDoc functionS
+  deleteDoc: jest.fn() // Mock deleteDoc functionS
 }));
 
 // Describe block for testing Firestore functions

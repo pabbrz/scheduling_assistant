@@ -8,7 +8,7 @@ import { getFirestore, doc, setDoc} from 'firebase/firestore'; // Import necessa
 jest.mock('firebase/firestore', () => ({
   getFirestore: jest.fn(), // Mock getFirestore function
   doc: jest.fn(), // Mock doc function
-  setDoc: jest.fn(), // Mock setDoc function
+  setDoc: jest.fn() // Mock setDoc function
 }));
 
 // Describe block for testing Firestore functions
