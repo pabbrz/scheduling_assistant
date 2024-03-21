@@ -1,4 +1,4 @@
-import { editTask } from './yourFirestoreFunctionsFile'; // Import the functions you want to test
+import { editTask } from './ourFirestoreFunctionsFile'; // Import the functions you want to test
 import { getFirestore, doc, setDoc} from 'firebase/firestore'; // Import necessary Firestore functions
 
 jest.mock('firebase/firestore', () => ({
