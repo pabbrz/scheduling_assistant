@@ -5,6 +5,7 @@ import OverviewPage from './pages/OverviewPage';
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import NotificationPage from './pages/NotificationPage';
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Registration" element={<RegistrationPage />} />
         <Route path="/Homepage" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/notification" element={<NotificationPage/>} />
       </Routes>
     </BrowserRouter>
   );

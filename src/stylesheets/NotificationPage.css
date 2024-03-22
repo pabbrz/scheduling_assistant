@@ -1,20 +1,60 @@
 .notification-container {
     width: 100vw;
-    margin: 0 auto;
+    /* margin: 0 auto;
     padding: 2rem;
-    text-align: center;
+    text-align: center; */
     display: flex;
     height: 100vh;
-    top: 0;
+    /* top: 0;
     left: 0;
-    margin: 0;
-    /* background-color: #2b2b2b; */
+    /* margin: 0; */
+    background-color: #2b2b2b;
     background-color: black;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif; */ */
   }
   
-  .sidebar, .right-sidebar {
+  .left-sidebar {
+    /* background-color: #171717; */
+    /* padding: 20px;
+    min-width: 250px; */
+    /* top: 0; */
+    /* left: 0; */
+    width: 15vw;
+    height: 100vh;
+    background-color: #2b2b2b;
+    
+    
+  }
+ .side-barDiv {
+  display: flex;
+  height: 10vh;
+ }
+
+ .sidebar-item {
+  /* padding: 20px; */
+  text-align: center;
+  background-color: black;
+  display: flex;
+  height: 70px;
+  width: 70%;
+  color: white;
+  padding: 10px; 
+  margin-top: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  /* border-top-left-radius: 25px; 
+  border-bottom-left-radius: 25px; 
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px; */
+  margin: auto;
+  text-align: left;
+  align-items: center;
+}
+
+
+  .right-sidebar {
     /* background-color: #171717; */
     padding: 20px;
     min-width: 250px;
@@ -25,19 +65,6 @@
     background-color: #2b2b2b;
   }
   
-  .sidebar-item {
-    padding: 20px;
-    text-align: center;
-    background-color: black;
-    display: block;
-    width: 100%;
-    color: white;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
   
   .profile-pic {
     border-radius: 50%;

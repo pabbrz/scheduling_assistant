@@ -55,7 +55,7 @@ function OverviewPage() {
     return(
         <>
             <div className="overviewPageContainer">
-                {/* Left Menu Sidebar */}
+                Left Menu Sidebar
                 <div className="leftSidebar">
                     {/* welcome pill */}
                     <div className="welcomePillDiv">
@@ -91,7 +91,7 @@ function OverviewPage() {
                         <div className="rightMiddleHeader">
                             <input className="form-control" type="text"></input>
                             <div className="iconWithBadge">
-                                <button className="iconButton"><img className="iconImg" src={bell} /></button>
+                                <Link to="/notification"><button className="iconButton"><img className="iconImg" src={bell} /></button></Link>
                                 {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge> */}
                             </div>
                             <div className="iconWithBadge">

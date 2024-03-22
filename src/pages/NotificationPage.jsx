@@ -39,10 +39,13 @@ function NotificationPage() {
     
 
     <div className="notification-container">
-      <aside className="sidebar">
+       {/* Left Menu Sidebar */}
+      <div className="left-sidebar">
         <div className="sidebar-item">
+          <div className="side-barDiv">
           <img src="/path/to/profile-pic.jpg" alt="Profile" className="profile-pic" />
           <span>Welcome to [user email]</span>
+          </div>
         </div>
         <nav className="navigation-menu">
           <a href="#" className="menu-item">Task Overview</a>
@@ -53,7 +56,7 @@ function NotificationPage() {
           <a href="#" className="menu-item">Preferences</a>
           <a href="#" className="menu-item">Log out</a>
         </nav>
-      </aside>
+      </div>
       <main className="main-content">
         <div className="search-bar">
           <input type="text" placeholder="Search for a task" />
