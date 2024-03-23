@@ -15,6 +15,21 @@
 
 
 }
+#fname, #lname, #email, #password, #password2 {
+    width: 75%;
+    margin: 0 auto;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+.regButton {
+    width: 75%;
+    margin: 10px auto;
+}
+
+#signUp {
+    margin: 10px;
+}
 
 .body {
     width: 100%;

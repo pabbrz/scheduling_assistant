@@ -4,6 +4,10 @@ import LandingPage from './pages/LandingPage';
 import OverviewPage from './pages/OverviewPage';
 import RegistrationPage from './pages/RegistrationPage';
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import '@fullcalendar/bootstrap5/index.js';
+
 
 function App() {
   //const [count, setCount] = useState(0)
@@ -15,6 +19,7 @@ function App() {
         <Route path="/overview" element={<OverviewPage />} />
         <Route path="/Registration" element={<RegistrationPage />} />
         <Route path="/Homepage" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );

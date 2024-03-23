@@ -1,17 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../stylesheets/LandingPage.css'
 import peopleWorking from "../assets/peopleWorking.png"
-import { Link } from "react-router-dom";
+
+import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from 'react';
+
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import Snackbar from '../components/Snackbar';
 
+import Snackbar from '../components/Snackbar';
 
 function LandingPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+
+  let navigate = useNavigate();
 
   const handleLogIn = async (e) => {
         e.preventDefault();
@@ -22,7 +26,7 @@ function LandingPage() {
             console.log(user);
             setError(null);
 
-            window.location.href = '/homepage';
+            navigate('/overview');
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -48,17 +52,17 @@ function LandingPage() {
           <div className="rightContainer">
             <div className="centered-element">
               <div className="left-align">
-                <h3>Log in</h3>
+                <h3 id="logInText">Login</h3>
                 <div>
-                    <h4>Email</h4>
-                    <input class="form-control" type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+                    {/* <h4>Email</h4> */}
+                    <input id="emailInput" className="form-control placeholderColor" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                     <br></br>
-                    <h4>Password</h4>
-                    <input class="form-control" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                    <button type="button" class="btn btn-light" onClick={handleLogIn}>Log in</button>
+                    {/* <h4>Password</h4> */}
+                    <input id="passwordInput" className="form-control placeholderColor" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                    <button type="button" className="btn btn-light" id="logInButton" onClick={handleLogIn}>Log in</button>
                     <h8><a href="url">Forgot your password?</a></h8>
                     <div><h8><a href="/Registration">Sign up!</a></h8></div>
-                    <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link>
+                    {/* <Link to="/overview" style={{ textDecoration: 'none' }}><p style={{ textDecorationLine: "none", color: "#000" }}>Temporary Link to Overview Page</p></Link> */}
                 </div>
   
                 <div>

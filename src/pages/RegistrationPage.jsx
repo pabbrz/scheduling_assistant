@@ -1,19 +1,24 @@
+import '../stylesheets/RegistrationPage.css'
+import peopleWorking from "../assets/peopleWorking.png"
+
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import axios from "axios";
-import { auth } from '../firebaseConfig';
-import app from '../firebaseConfig';
-import '../stylesheets/RegistrationPage2.css'
-import peopleWorking from "../assets/peopleWorking.png"
-const loginLink = "/Login";
+// import bcrypt from 'bcrypt';
+
+{/* Firebase imports */}
 import 'firebase/auth';
 import 'firebase/firestore';
-// import bcrypt from 'bcrypt';
+import app from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { getFirestore, collection, addDoc, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDoc, setDoc, updateDoc, increment } from 'firebase/firestore';
+import { auth, db } from '../firebaseConfig';
+
+const loginLink = "/Login";
 
 //Sign up function allows the user to set up their name(first and last),
 //their number, email, and password for their new account
@@ -22,15 +27,17 @@ function RegistrationPage() {
   const [password, setPassword] = useState('');
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
+
+  let navigate = useNavigate();
   
-  const db = getFirestore(app);
+//   const db = getFirestore(app);   // imported now from firebaseConfig.js
   const userCollectionRef = collection(db, 'users');
   
 //   const generatePasswordHash = async (password) => {
 //     // Generate a salt to add randomness to the hash
 //     const saltRounds = 10;
 //     const salt = await bcrypt.genSalt(saltRounds);
-  
+//   const db = getFirestore(app);   // imported now from firebaseConfig.js 
 //     // Generate the hash using the salt and the password
 //     const hash = await bcrypt.hash(password, salt);
   
@@ -61,16 +68,18 @@ function RegistrationPage() {
       .then(async(userCredential) => {
           // Signed in
           const user = userCredential.user;
-          await addDoc(collection(db, "users"), {
+        await setDoc(doc(db, "users", user.uid), {  ///await addDoc(collection(db, "users"),{
             email: user.email,
-            password_hash: "******************************",
+            // password_hash: "******************************", // firebase authentication handles passwords securely from what i've read
             user_id: user.uid,
-            username: fname+' '+lname
-          })
+            fname: fname,
+            lname: lname,
+            username: fname + ' ' + lname
+          });
           console.log(user);
           // setShowSignUp(!showSignUp);
           // ...
-          window.location.href = '/';
+          navigate('/'); // navigate to login page
       })
       .catch((error) => {
           const errorCode = error.code;
@@ -101,17 +110,17 @@ function RegistrationPage() {
                 onSubmit={handleSubmit(onSubmit)}
                 id="signupform"
                 >
-                <h2>Sign Up</h2>
+                <h2 id="signUp">Sign Up</h2>
                 <br />
                 <div className="mb-3">
-                    <label for="fname" className="form-label">
+                    <label htmlFor="fname" className="form-label">
                     First Name
                     </label>
                     <input
                     type="text"
                     name="fname"
                     value={fname}
-                    autocomplete="off"
+                    autoComplete="off"
                     style={{ textAlign: 'center' }}
                     {...register("fname")}
                     className={`form-control ${errors.fname ? "is-invalid" : ""}`}
@@ -122,7 +131,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="lname" className="form-label">
+                    <label htmlFor="lname" className="form-label">
                     Last Name
                     </label>
                     <input
@@ -140,7 +149,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="email" className="form-label">
+                    <label htmlFor="email" className="form-label">
                     Email address
                     </label>
                     <input
@@ -161,7 +170,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="password" className="form-label">
+                    <label htmlFor="password" className="form-label">
                     Password
                     </label>
                     <input
@@ -183,7 +192,7 @@ function RegistrationPage() {
                 </div>
 
                 <div className="mb-3">
-                    <label for="password2" className="form-label">
+                    <label htmlFor="password2" className="form-label">
                     Confirm Password
                     </label>
                     <input
@@ -202,13 +211,13 @@ function RegistrationPage() {
                     </div>
                 </div>
 
-                <button type="submit" className="btn btn-primary mr-1">
+                <button type="submit" className="btn btn-primary mr-1 regButton">
                     Sign Up
                 </button>
                 <button
                     type="button"
                     onClick={() => reset()}
-                    className="btn btn-secondary"
+                    className="btn btn-secondary regButton"
                 >
                     Reset
                 </button>
