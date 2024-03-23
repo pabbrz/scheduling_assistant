@@ -17,29 +17,39 @@
 /******************** Left Sidebar and children ********************/
 .leftSidebar {
     /* flex-grow: 1; */
-    width: 15vw;
-    height: "100vh";
+    width: 12vw;
+    height: 100vh;
     background-color: #2b2b2b;
+    /* border: 2px solid green; */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .welcomePillDiv {
     display: flex;
     height: 10vh;
+    /* border: 2px solid blue; */
+    width: 12vw;
+    border-bottom: 2px solid #d6123c;
+
 }
 
 .welcomePill {
     display: flex;
     background-color: #161616;
     height: 50px;
-    width: 90%;
     border-top-left-radius: 25px; /* 50% of height */
     border-bottom-left-radius: 25px; /* 50% of height */
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     margin: auto;
     text-align: left;
-   
     align-items: center;
+    /* border: 2px solid pink; */
+    padding: auto;
+    justify-content: center;
 }
 
 .welcomePillPhoto {
@@ -53,23 +63,260 @@
     margin-right: 7px;
 }
 
-#welcomePillText::after {
+.overviewPageContainer #avatar {
+    width: 44px;
+    height: 44px;
+    border-top-left-radius: 22px; /* 50% of height */
+    border-bottom-left-radius: 22px; /* 50% of height */
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    /* margin-right: 7px; */
+    /* border: 2px solid cyan; */
+    padding: 0;
+    margin: 0;
+
+}
+
+#welcomePillTextArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px;
+    overflow: hidden;
+    width: 125px;
+    height: 30px;
+    white-space: normal;
+    /* background-color: pink; */
+    margin: 0;
+}
+
+#welcomePillText::after { /*Line Break*/
     content: "\a";
     white-space: pre;
+}
+
+.btn-group-vertical {
+    width: 90%;
+    margin-top: 25px;
+}
+
+.menuButton {
+    margin: 0;
+    background: #2b2b2b;
+    border: none;
+    text-align: left;
+}
+
+.menuButton:hover {
+    background: #161616;
+}
+
+.align-bottom {
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.smallIcon {
+    max-width: 20px;
+    margin-right: 10px;
 }
 
 /******************** Middle portion and children ********************/
 .middle {
     /* flex-grow: 1; */
-    width: 65vw;
-    height: "100vh";
+    width: 73vw;
+    height: 100vh;
     background-color: #161616;
+}
+
+.middleHeader {
+    display: flex;
+    justify-content: space-between;
+    background-color: #2b2b2b;
+    height: 10vh;
+    align-content: center;
+    border-bottom: 2px solid #d6123c;
+}
+
+.title {
+    color: white;
+    align-items: center;
+}
+
+.leftMiddleHeader {
+    margin: 20px 20px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    
+}
+
+.rightMiddleHeader {
+    display: flex;
+    margin: 20px 20px;
+    align-items: center;
+}
+
+.overviewPageContainer.form-control {
+    max-height:2rem;
+    width:auto;
+}
+
+.iconButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    /* max-height: 2rem;
+    max-width: 2rem; */
+    cursor: pointer;
+    background-color: #2b2b2b;
+}
+
+.iconButton:hover {
+    /* Remove hover effect */ /* I can't get this to work, either none or white */
+    border: none;
+    outline: none;
+}
+
+.iconImg {
+    max-height: 1rem;
+    max-width: 1rem;
+    /* position: relative;
+    display: inline-block; */
+}
+
+/* .iconImg .myBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+} */
+
+.iconImg:hover {
+    border: none;
+    outline: none;
+}
+
+.middleMain {
+    max-height: calc(100vh - 110px); /* Adjusts height considering the header height */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+.scrollableContent {
+    width: 100%;
+}
+
+.calendar {
+    margin: 20px 20px;
+}
+
+/* .fc is FullCalendar */
+.fc-toolbar-title {
+    color: white;
+}
+
+.fc-day-header, .fc-col-header-cell {
+    color: white;
+}
+
+.fc .fc-daygrid-day .fc-daygrid-day-number {
+    color: white;
+}
+
+.fc .fc-day-today {
+    background-color: #d6123c96  !important;
+}
+
+.taskList {
+    margin: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    border: 2px solid red;
+}
+
+.taskListInput {
+    font-size: 24px;
+}
+
+.taskListLabel {
+    font-size: 24px;
+    color: white;
+    margin-left: 10px;
 }
 
 /******************** Right sidebar and children ********************/
 .rightSidebar {
     /* flex-grow: 1; */
-    width: 20vw;
-    height: "100vh";
+    max-width: 15vw;
+    height: 100vh;
+    background-color: #2b2b2b;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    color: white;
+    width: 100%;
+}
+
+.rightSidebar .spacer {
+    height: 10vh;
+    border-bottom: 2px solid #d6123c;
+}
+
+.rightSidebarTop {
+    display: flex;
+    flex-direction: column;
+    /* margin: 10px; */
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 30vh;
+    max-width: 20vw;
+    margin-bottom: 30px;
+}
+
+/* CreateTask component styles for overview page */
+#description {
+    max-height:2rem;
+    width:auto;
+}
+#dueDate {
+    max-height:2rem;
+    width:auto;
+}
+
+/* .createTaskForm {
+    max-width: 20vw;
+    background-color: pink;
+} */
+
+/* .form-label {
+    max-width: 20vw;
+    background-color: greenyellow;
+} */
+
+
+
+.rightSidebarMiddle {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    margin-left: 20px;
+    height: 25vh;
     background-color: #2b2b2b;
 }
+
+.rightSidebarBottom {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    margin-left: 20px;
+    height: 25px;
+}
+
