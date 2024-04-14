@@ -2,93 +2,49 @@ import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 
 
-import db from '../firebaseConfig.js';
+import { db } from '../firebaseConfig.js';
 import { doc, getDoc, addDoc, collection } from "firebase/firestore";
 
 import { useAuth } from '../AuthContext';
-import useUserData from '../firebaseServices';
+import { useUserData } from '../firebaseServices';
 
 
 export default function CreateTask() {
     
     const { currentUser } = useAuth();
     const userID = currentUser.uid;
-    const userData = useUserData(userID);
+    const [userData, error] = useUserData(userID);
 
     console.log('userData: ', userData);
 
-    // console.log('fname: ', userData.fname);
-
-    // // get user's first name from firestore, runs again when user changes
-    // useEffect(() => {
-    //   const fetchUserData = async () => {
-    //     if (currentUser) {
-    //       const userRef = doc(db, 'users', currentUser.uid);
-    //       const userSnap = await getDoc(userRef);
-  
-    //       if (userSnap.exists()) {
-    //         setFname(userSnap.data().fname);
-    //       } else {
-    //         console.log('Doc does not exist!');
-    //       }
-    //     }
-    //   };
-    // fetchUserData();
-    // }, [currentUser]);
-
-    // const docRef = doc(db, "cities", "SF");
-    // const docSnap = await getDoc(docRef);
-
-    // if (docSnap.exists()) {
-    //   console.log("Document data:", docSnap.data());
-    // } else {
-    //   // docSnap.data() will be undefined in this case
-    //   console.log("No such document!");
-    // }
+    useEffect(() => {
+        if (userData) {
+            console.log('User fname:', userData.fname);
+        } else if (error) {
+            console.log('Error fetching user data:', error);
+        }
+    }, [userData, error]);
     
-  
-    
-    // console.log('Fname from auth context new test: ', userData.fname);
-  
-
-    // get a reference to the firestore database
-    // let db;
-    // try {
-    //   db = getFirestore(app);
-    //   console.log('got firestore db reference');
-    // }
-    // catch (error) {
-    //   console.error('Error getting firestore db reference: ', error);
-    // }
-
-    // // get user id from firebase auth object
-    // let userID;
-    // try {
-    //   userID = auth.currentUser.uid; //tried firebase.auth().currentUser.uid but it didn't work either, getting NULL
-    //   console.log('User ID: ', userID);
-    // }
-    // catch (error) {
-    //   console.error('Error getting user ID: ', error);
-    // }
+    console.log('db:', db);
 
     // db.collection('users').doc(userID).collection('tasks').add(taskData);
 
-    // function to add a task to a user's 'tasks' sub collection
-    // async function addTaskToUser(userID, taskData) {
-    //     if (!userID) {
-    //       console.error('User not logged in');
-    //       return;
-    //     }  
+    //function to add a task to a user's 'tasks' sub collection
+    async function addTaskToUser(userID, taskData) {
+        if (!userID) {
+          console.error('User not logged in');
+          return;
+        }  
       
-    //     try {
-    //       await addDoc(collection(db, 'users', userID, 'tasks'), taskData);
-    //       console.log('Task added');
-    //     }
-    //     catch (error) {
-    //       console.error('Error adding task: ', error);
-    //     }
-          
-    // }
+        try {
+          //await addDoc(collection(db, 'users', userID, 'tasks'), taskData);
+          await addDoc(collection(db, 'tasks'), taskData);
+          console.log('Task added');
+        }
+        catch (error) {
+          console.error('Error adding task: ', error);
+        }  
+    }
    
     // react useForm hook
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -99,7 +55,8 @@ export default function CreateTask() {
           name: data.name,
           description: data.description,
           priority: data.priority,
-          dueDate: data.dueDate
+          due: data.due,
+          userID: userID // user id of the logged in user
         };
         addTaskToUser(userID, taskData);
         reset(); // clear form after submit
@@ -184,7 +141,7 @@ export default function CreateTask() {
                 name="dueDate"
                 id="dueDate"
                 min={new Date().toISOString().split("T")[0]}
-                {...register("dueDate")}
+                {...register("due")}
               />
             </div>
           </div>

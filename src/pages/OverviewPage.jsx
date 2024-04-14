@@ -2,8 +2,7 @@ import '../stylesheets/OverviewPage.css'
 import CreateTask from '../components/CreateTask';
 import Badge from 'react-bootstrap/Badge'
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from 'react'
-import { useAuth } from '../AuthContext'
+import { useState, useEffect } from 'react'
 import TaskList from '../components/TaskList'
 import avatar from "../assets/Nola.jpg";
 
@@ -31,27 +30,35 @@ import taskItem from "../assets/taskItem.svg"
 
 // firebase
 // import { getFirestore, collection, addDoc, doc, getDoc, getDocs, updateDoc, increment, firebase } from 'firebase/firestore';
-// import app from '../firebaseConfig';
+import { db } from '../firebaseConfig.js';
+import { useAuth } from '../AuthContext';
+import { useUserData, fetchTasksByUserId, deleteTask } from '../firebaseServices';
+import { useTasks } from '../TaskContext';
 
 function OverviewPage() {
-    // // firestore stuff
-    // const userID = firebase.auth().currentUser.uid;
-    // const db = getFirestore(app);
+    
+    const { currentUser } = useAuth();
+    const userID = currentUser.uid;
+    const [userData, error] = useUserData(userID);
 
-    // // Function to fetch documents from a specific collection
-    // const fetchCollectionData = async (collectionName) => {
-    //     try {
-    //     const collectionRef = collection(db, collectionName);
-    //     const querySnapshot = await getDocs(collectionRef);
-    //     querySnapshot.forEach((doc) => {
-    //         console.log(`${doc.id} =>`, doc.data());
-    //     });
-    //     } catch (error) {
-    //     console.error("Error fetching collection data:", error);
+    console.log('userID: ', userID);
+
+    const tasks = useTasks();
+
+    // // get tasks by userID
+    // const [tasks, setTasks] = useState([]);
+    // useEffect(() => {
+    //     if (userData) {
+    //         console.log('User fname:', userData.fname);
+    //         fetchTasksByUserId(userID).then((tasks) => {
+    //             console.log('tasks:', tasks);
+    //             setTasks(tasks);
+    //         });
+    //     } else if (error) {
+    //         console.log('Error fetching user data:', error);
     //     }
-    // };
+    // }, [userData, error]);
 
-    // fetchCollectionData('users');
 
     let navigate = useNavigate();
 
@@ -68,12 +75,12 @@ function OverviewPage() {
     }
 
 
-    
     // tasks for displaying in middle of page
-    const [tasks, setTasks] = useState([{name: "task1", description: "description1", priority: "low", dueDate: "dueDate1"}, {name: "task2", description: "description2", priority: "medium", dueDate: "dueDate2"}, {name: "task3", description: "description3", priority: "high", dueDate: "dueDate3"}]);
-    const handleTaskChecked = (index) => {
-        console.log("task checked: ", index);
+    // const [tasks, setTasks] = useState([{name: "task1", description: "description1", priority: "low", dueDate: "dueDate1"}, {name: "task2", description: "description2", priority: "medium", dueDate: "dueDate2"}, {name: "task3", description: "description3", priority: "high", dueDate: "dueDate3"}]);
+    const handleTaskChecked = (taskID) => {
+        console.log("task checked: ", taskID);
         //TODO remove task from urgentTasks, update firebase, and update state.
+        deleteTask(taskID);
     }
 
     // code for dynamically changing the middle portion of the page based on menu selection

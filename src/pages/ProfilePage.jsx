@@ -1,34 +1,90 @@
 import '../stylesheets/ProfilePage.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import peopleWorking from "../assets/peopleWorking.png";
 import avatar from "../assets/Nola.jpg";
 import { Link } from "react-router-dom";
+import { useUserData, updateUserData } from '../firebaseServices';
+import { useAuth } from '../AuthContext';
+import { getAuth } from 'firebase/auth';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const ProfilePage = () => {
-    const [fname, setFname] = useState('Joshua');
-    const [lname, setLname] = useState('Sterken');
-    const [email, setEmail] = useState('joshuasterken@my.unt.edu');
-    const [password, setPassword] = useState('thisismypassword');
+    const { currentUser } = useAuth();
+    const userID = currentUser.uid;
+    const [userData, error] = useUserData(userID);
 
-    const handleFnameChange = (e) => {
-        setFname(e.target.value);
+    useEffect(() => {
+        if (userData) {
+            console.log('User fname:', userData.fname);
+        } else if (error) {
+            console.log('Error fetching user data:', error);
+        }
+    }, [userData, error]);
+    
+    const [fname, setFname] = useState('');
+    const [lname, setLname] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    // load user data
+    useEffect(() => {
+        if (userData) {
+            setFname(userData.fname || '');
+            setLname(userData.lname || '');
+            setEmail(userData.email || '');
+        }
+    }, [userData]);
+
+    console.log('profile page userData:', userData);
+
+    const handleFnameChange = (e) => {setFname(e.target.value);};
+    const handleLnameChange = (e) => {setLname(e.target.value);};
+    const handleEmailChange = (e) => {setEmail(e.target.value);};
+    const handlePasswordChange = (e) => {setPassword(e.target.value);};
+    
+    // this is to update db with changes
+    // const handleSubmit = (e) => {e.preventDefault();};
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const auth = getAuth();
+        const user = auth.currentUser;
+
+        if (user) {
+            await updateUserData(user.uid, {
+                fname: fname,
+                lname: lname,
+                email: email,
+                // TODO password
+            });
+        }
     };
 
-    const handleLnameChange = (e) => {
-        setLname(e.target.value);
+    // code for uploading avatar
+    const [image, setImage] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState(avatar); // Initial default avatar
+
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0]);
+        }
     };
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+    const uploadImage = async () => {
+        if (image && currentUser) {
+            const storage = getStorage();
+            const storageRef = ref(storage, `avatars/${currentUser.uid}`);
+            try {
+                const snapshot = await uploadBytes(storageRef, image);
+                const downloadUrl = await getDownloadURL(snapshot.ref);
+                setAvatarUrl(downloadUrl);
+                await updateUserData(currentUser.uid, { avatarUrl: downloadUrl });
+                console.log("Image uploaded and user profile updated.");
+            } catch (error) {
+                console.error("Failed to upload image: ", error);
+            }
+        }
     };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();                             // TODO: Add functionality to update user info in database
-    };
 
     return (
         <div>
@@ -42,7 +98,9 @@ const ProfilePage = () => {
 
 
                     <div className="centered-element-profilePG">
-                        <img src={avatar} className="rounded-circle" id="avatar" alt="Avatar" />
+                        <button onClick={uploadImage}>
+                            <img src={avatarUrl} className="rounded-circle" id="avatar" alt="Avatar" />
+                        </button>
                         <form onSubmit={handleSubmit}>
                             <label>
                                 {/* First Name: */}
