@@ -1,7 +1,7 @@
 import '../stylesheets/ProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import peopleWorking from "../assets/peopleWorking.png";
-import avatar from "../assets/peopleWorking.png";
+import avatar from "../assets/whiteQuestionMark.png";
 import { Link } from "react-router-dom";
 import { useUserData, updateUserData } from '../firebaseServices';
 import { useAuth } from '../AuthContext';

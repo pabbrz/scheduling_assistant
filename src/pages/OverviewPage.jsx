@@ -13,6 +13,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import bootstrap5Plugin from '@fullcalendar/bootstrap5';
 // import 'path/to/superhero/bootstrap.min.css';
+import moment from 'moment';
 
 
 {/* Image imports */}
@@ -68,7 +69,45 @@ function OverviewPage() {
 
     console.log('userID: ', userID);
 
+    // get tasks from firebase
     const tasks = useTasks();
+
+    // format tasks for FullCalendar
+    const formattedTasks = tasks.map(task => {
+        // const dueDate = new Date(task.due + 'T00:00:00');
+        
+        // const dateParts = task.due.split('-');
+        // const year = parseInt(dateParts[0], 10);
+        // const month = parseInt(dateParts[1], 10) - 1; // Months are 0-indexed in JavaScript
+        // const day = parseInt(dateParts[2], 10);
+        // const localDate = new Date(Date.UTC(year, month, day));
+
+        const start = moment(task.due).startOf('day').toDate(); // without this, calendar shows event on day before
+        const color = task.priority === 'High' ? 'red' : (task.priority === 'Medium' ? 'yellow' : 'green');
+        console.log(task.name, color);
+
+        return {
+        title: task.name,
+        start: start,
+        id: task.id,
+        color: task.priority === 'High' ? 'red' : (task.priority === 'Medium' ? 'orange' : 'green'),
+        textColor: 'white',
+        allDay: true
+        };
+    });
+
+    // function to handle event click on FullCalendar
+    function handleEventClick(clickInfo) {
+        clickInfo.event.remove(); // removes from the calendar
+        deleteTask(clickInfo.event.id);
+        
+        // uncomment this if we want confirmation before deleting
+        // if (window.confirm(`Are you sure you want to clear the event '${clickInfo.event.title}'?`)) {
+        //     clickInfo.event.remove(); // removes from the calendar
+    
+        //     deleteTask(clickInfo.event.id);
+        // }
+    }
 
     let navigate = useNavigate();
 
@@ -127,7 +166,13 @@ function OverviewPage() {
 
     // const displayTasks = searchQuery ? filteredTasks : tasks;
 
-
+    // add tasks that are due today to todayTasks
+    const today = new Date();
+    const todayTasks = tasks.filter(task => {
+        const dueDate = moment(task.due).startOf('day').toDate();
+        // const dueDate = new Date(task.due);
+        return dueDate.getDate() === today.getDate() && dueDate.getMonth() === today.getMonth() && dueDate.getFullYear() === today.getFullYear();
+    });
 
 
     // code for dynamically changing the middle portion of the page based on menu selection
@@ -145,8 +190,14 @@ function OverviewPage() {
                             themeSystem="bootstrap5"
                             // contentHeight={"auto"}
                             aspectRatio={1.5}
+                            events={formattedTasks}
+                            timeZone='local'
+                            eventClick={handleEventClick}
                         />
-                    </div>
+                    </div>,
+        'today': todayTasks && todayTasks.length > 0 
+        ? <TaskList tasks={todayTasks} handleTaskChecked={handleTaskChecked} /> 
+        : <p id="noTasksToday">No tasks due today !!!</p>
     }
 
     // urgent tasks list
@@ -176,11 +227,11 @@ function OverviewPage() {
                     </div>
                     {/* menu list */}
                     <div className="btn-group-vertical">
-                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("taskList")}><img src={task} className="smallIcon" />Task List</button>
                         <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("calendar")}><img src={calendar} className="smallIcon" />Calendar</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={grades} className="smallIcon" />Today?</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Completed?</button>
-                        <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Trash?</button>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("taskList")}><img src={task} className="smallIcon" />Task List</button>
+                        <button type="button" className="btn btn-secondary menuButton" onClick={()=>handleMenuSelection("today")}><img src={grades} className="smallIcon" />Today</button>
+                        {/* <button type="button" className="btn btn-secondary menuButton"><img src={teachers} className="smallIcon" />Completed?</button>
+                        <button type="button" className="btn btn-secondary menuButton"><img src={notes} className="smallIcon" />Trash?</button> */}
                     </div>
                     {/* preferences & log out */}
                     <div className="btn-group-vertical align-bottom">
@@ -231,16 +282,16 @@ function OverviewPage() {
                             </label>
                         </div>    
                             <TaskList tasks={displayedTasks} handleTaskChecked={handleTaskChecked} />
-                            <div className="iconWithBadge">
+                            {/* <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={bell} /></button>
-                                {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge> */}
+                                {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge>
                             </div>
                             <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={mail} /></button>
                             </div>
                             <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={message} /></button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

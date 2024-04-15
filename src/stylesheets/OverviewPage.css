@@ -234,22 +234,69 @@
     background-color: #d6123c96  !important;
 }
 
+.fc-event-title {
+    color: white !important; /* Ensure text color overrides anything else */
+}
+
+
 .taskList {
     margin: 20px 20px;
+    margin-right: 50px;
     display: flex;
     flex-direction: column;
     align-items: start;
+    /* width: 100%; */
     /* border: 2px solid red; */
+}
+
+.taskItem {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+    border-radius: 10px;
+    /* border: 2px solid blue; */
+
+}
+
+.taskItem:hover {
+    background-color: #2b2b2b;
+    cursor: pointer;
+    
 }
 
 .taskListInput {
     font-size: 24px;
+    margin-right: 10px;
 }
 
 .taskListLabel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
     font-size: 24px;
     color: white;
-    margin-left: 10px;
+    /* margin-left: 10px; */
+}
+
+.taskDescription {
+    margin-left: auto;
+}
+.taskDate {
+    margin-left: auto;
+}
+
+#noTasksToday {
+    color: white;
+    margin: 20px;
+    font-size: 24px;
+    text-align: center;
+    align-items: center;
+    margin-top: 25%;
+    
+    /* border: 2px solid red; */
+
 }
 
 /******************** Right sidebar and children ********************/
@@ -282,14 +329,31 @@
 }
 
 /* CreateTask component styles for overview page */
+#name {
+    max: height 4rem;
+    width:auto;
+    background: lightgray;
+}
+
 #description {
     max-height:2rem;
     width:auto;
+    background: lightgray;
 }
+
+#priority {
+    max-height:2rem;
+    width: 10px;
+    /* background: lightgray; */
+}
+
 #dueDate {
     max-height:2rem;
-    width:auto;
+    width: 150px;
+    background: lightgray;
 }
+
+
 
 /* .createTaskForm {
     max-width: 20vw;
