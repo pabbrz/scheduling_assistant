@@ -290,7 +290,7 @@
 #noTasksToday {
     color: white;
     margin: 20px;
-    font-size: 24px;
+    font-size: 36px;
     text-align: center;
     align-items: center;
     margin-top: 25%;
@@ -330,7 +330,7 @@
 
 /* CreateTask component styles for overview page */
 #name {
-    max: height 4rem;
+    max-height: 4rem;
     width:auto;
     background: lightgray;
 }
