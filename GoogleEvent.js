@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { gapi } from 'gapi-script'
 import Event from './components/Event.js'
 
-function App() {
+function GoogleIntegrate() {
     const [events, setEvents] = useState([])
 
     const calendarID = process.env.REACT_APP_CALENDAR_ID
