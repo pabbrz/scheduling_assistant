@@ -80,4 +80,4 @@ function GoogleIntegrate() {
     )
 }
 
-export default App
+export default GoogleIntegrate
