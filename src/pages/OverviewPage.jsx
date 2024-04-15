@@ -43,6 +43,8 @@ function OverviewPage() {
     const [setTasks] = useTasks();
     const [searchQuery, setSearchQuery] = useState('');
     const [displayedTasks, setDispayedTasks] = useState([]);
+    const [filterOption, setFilterOption] = useState('');
+    const [searchTerm, setSearchTerms] = useState("");
     const [avatarUrl, setAvatarUrl] = useState(avatar);
 
     // for avatar and display name
@@ -99,6 +101,25 @@ function OverviewPage() {
             task.description.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setDispayedTasks(filteredTasks);
+    }
+
+    const handleFilterChange = (event) => {
+        setFilterOption(event.target.value);
+        if(event.target.value === 'dueDate') {
+            handleFilterByDueDate();
+        } else if (event.target.value === 'priority') {
+            handleFilterByPriority();
+        }
+    }
+
+    const handleFilterByDueDate = () => {
+        const sortedByDueDate = [...displayedTasks].sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        setDispayedTasks(sortedByDueDate);
+    }
+
+    const handleFilterByPriority = () => {
+        const sortedByPriority = [...displayedTasks].sort((a, b) => a.priority.localeCompare(b.priority));
+        setDispayedTasks(sortedByPriority);
     }
 
 
@@ -178,8 +199,37 @@ function OverviewPage() {
                             <h2 className="title">Overview</h2>
                         </div>
                         <div className="rightMiddleHeader">
-                            <input className="form-control" type="text" placeholder="Search tasks by description" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
-                            <button onClick={handleSearch}>Search</button>
+                            <input className="form-control" type="text" placeholder="Search tasks by description" onChange={(event) => {setSearchTerm(e.target.value)}}></input>
+                            <button onClick={()=>handleMenuSelection("taskList")}>Search</button>
+                        <div>
+                        {/* <div className="template_Container">
+                            {
+                                TaskList
+                                    .filter((val) => {
+                                        if(searchTerm == ""){
+                                            return val;
+                                        } else if(val.description.toLowerCase().includes(searchTerm.toLowerCase())){
+                                            return val;
+                                        }
+                                    })
+                                    .map((val) => {
+                                        return(
+                                            <div className="template" key={val.task.name}>
+                                            <h3>{val.name}</h3>
+                                            </div>
+                                        )
+                                    }
+                                )
+                            }
+                        </div> */}
+                            <label>
+                            <select value={filterOption} onChange={handleFilterChange}>
+                                <option value="">Select Filter</option>
+                                <option value="dueDate">Due Date</option>
+                                <option value="priority">Priority</option>
+                            </select>
+                            </label>
+                        </div>    
                             <TaskList tasks={displayedTasks} handleTaskChecked={handleTaskChecked} />
                             <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={bell} /></button>
