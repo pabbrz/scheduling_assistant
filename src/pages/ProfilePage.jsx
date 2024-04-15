@@ -1,12 +1,15 @@
 import '../stylesheets/ProfilePage.css';
 import React, { useState, useEffect } from 'react';
 import peopleWorking from "../assets/peopleWorking.png";
-import avatar from "../assets/Nola.jpg";
+import avatar from "../assets/peopleWorking.png";
 import { Link } from "react-router-dom";
 import { useUserData, updateUserData } from '../firebaseServices';
 import { useAuth } from '../AuthContext';
-import { getAuth } from 'firebase/auth';
+import { getAuth, updatePassword } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { doc, updateDoc } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
+
 
 const ProfilePage = () => {
     const { currentUser } = useAuth();
@@ -25,6 +28,8 @@ const ProfilePage = () => {
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [image, setImage] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState(avatar); // Initial default avatar
 
     // load user data
     useEffect(() => {
@@ -32,6 +37,7 @@ const ProfilePage = () => {
             setFname(userData.fname || '');
             setLname(userData.lname || '');
             setEmail(userData.email || '');
+            setAvatarUrl(userData.avatarUrl || avatar);
         }
     }, [userData]);
 
@@ -49,6 +55,15 @@ const ProfilePage = () => {
         const auth = getAuth();
         const user = auth.currentUser;
 
+        if (user && password.trim()) {  //if new password and not just white space
+            updatePassword(user, password.trim()).then(() => {
+                console.log("Password updated successfully.");
+                setPassword('');
+            }).catch((error) => {
+                console.error("Error updating password: ", error);
+            });
+        }
+
         if (user) {
             await updateUserData(user.uid, {
                 fname: fname,
@@ -60,28 +75,25 @@ const ProfilePage = () => {
     };
 
     // code for uploading avatar
-    const [image, setImage] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState(avatar); // Initial default avatar
-
-    const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0]);
+    const uploadImage = async (file, userID) => {
+        const storage = getStorage();
+        const storageRef = ref(storage, `avatars/${userID}`);
+        try {
+            const snapshot = await uploadBytes(storageRef, file);
+            const url = await getDownloadURL(snapshot.ref);
+            setAvatarUrl(url);
+            // update user's document with new avatar URL
+            const userDocRef = doc(db, 'users', userID);
+            await updateDoc(userDocRef, { avatarUrl: url });
+        } catch (error) {
+            console.error("Error uploading image: ", error);
         }
     };
 
-    const uploadImage = async () => {
-        if (image && currentUser) {
-            const storage = getStorage();
-            const storageRef = ref(storage, `avatars/${currentUser.uid}`);
-            try {
-                const snapshot = await uploadBytes(storageRef, image);
-                const downloadUrl = await getDownloadURL(snapshot.ref);
-                setAvatarUrl(downloadUrl);
-                await updateUserData(currentUser.uid, { avatarUrl: downloadUrl });
-                console.log("Image uploaded and user profile updated.");
-            } catch (error) {
-                console.error("Failed to upload image: ", error);
-            }
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            await uploadImage(file, currentUser.uid);
         }
     };
 
@@ -98,9 +110,10 @@ const ProfilePage = () => {
 
 
                     <div className="centered-element-profilePG">
-                        <button onClick={uploadImage}>
-                            <img src={avatarUrl} className="rounded-circle" id="avatar" alt="Avatar" />
-                        </button>
+                        <label htmlFor="imageUpload">
+                            <img src={avatarUrl} className="rounded-circle" id="avatar" alt="Avatar" style={{ cursor: 'pointer' }} />
+                        </label>
+                        <input type="file" id="imageUpload" style={{ display: 'none' }} onChange={handleImageChange} />
                         <form onSubmit={handleSubmit}>
                             <label>
                                 {/* First Name: */}
@@ -119,7 +132,7 @@ const ProfilePage = () => {
                             <br />
                             <label>
                                 {/* Password: */}
-                                <input type="password" value={password} className="form-control profileInput" onChange={handlePasswordChange} />
+                                <input id="p" type="password" value={password} className="form-control profileInput" onChange={handlePasswordChange} placeholder='Enter new password'/>
                             </label>
                             <br />
                             <button type="submit" className="btn btn-light" id="update">Update</button>
