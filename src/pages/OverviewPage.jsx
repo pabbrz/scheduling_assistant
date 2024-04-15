@@ -4,7 +4,7 @@ import Badge from 'react-bootstrap/Badge'
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import TaskList from '../components/TaskList'
-import avatar from "../assets/Nola.jpg";
+import avatar from "../assets/peopleWorking.png";
 
 {/* Calendar */}
 // import Calendar from 'react-calendar'
@@ -40,25 +40,33 @@ function OverviewPage() {
     const { currentUser } = useAuth();
     const userID = currentUser.uid;
     const [userData, error] = useUserData(userID);
+    const [setTasks] = useTasks();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [displayedTasks, setDispayedTasks] = useState([]);
+    const [avatarUrl, setAvatarUrl] = useState(avatar);
+
+    // for avatar and display name
+    useEffect(() => {
+        if (userData) {
+            setAvatarUrl(userData.avatarUrl || avatar);
+            console.log('User fname:', userData.fname);
+        } else if (error) {
+            console.log('Error fetching user data:', error);
+        }
+    }, [userData, error]);
+
+    
+    //gets task by user ID
+    useEffect(() => {
+        fetchTasksByUserId(userID)
+        .then((tasks) => setTasks(tasks))
+        .catch((error) => console.log('Error fetching tasks:', error));
+    }, [userID, setTasks]);
+
 
     console.log('userID: ', userID);
 
     const tasks = useTasks();
-
-    // // get tasks by userID
-    // const [tasks, setTasks] = useState([]);
-    // useEffect(() => {
-    //     if (userData) {
-    //         console.log('User fname:', userData.fname);
-    //         fetchTasksByUserId(userID).then((tasks) => {
-    //             console.log('tasks:', tasks);
-    //             setTasks(tasks);
-    //         });
-    //     } else if (error) {
-    //         console.log('Error fetching user data:', error);
-    //     }
-    // }, [userData, error]);
-
 
     let navigate = useNavigate();
 
@@ -83,6 +91,24 @@ function OverviewPage() {
         deleteTask(taskID);
     }
 
+
+    //search task by description
+    const handleSearch = () => {
+        const filteredTasks = tasks.filter((task) =>
+            task.name.toLowerCase().includes(searchQuery.toLowerCase()),
+            task.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setDispayedTasks(filteredTasks);
+    }
+
+
+
+
+    // const displayTasks = searchQuery ? filteredTasks : tasks;
+
+
+
+
     // code for dynamically changing the middle portion of the page based on menu selection
     const [menuSelection, setMenuSelection] = useState('calendar');
     const handleMenuSelection = (value) => {
@@ -103,8 +129,15 @@ function OverviewPage() {
     }
 
     // urgent tasks list
-    const [urgentTasks, setUrgentTasks] = useState(["task1", "task2", "task3"]);
-    const [urgentTasksCount, setUrgentTasksCount] = useState(urgentTasks.length);
+    const [urgentTasks, setUrgentTasks] = useState([]);
+    // const [urgentTasksCount, setUrgentTasksCount] = useState(urgentTasks.length);
+
+    useEffect(() => {
+        if (tasks.length > 0) {
+            const highPriorityTasks = tasks.filter(task => task.priority === 'High');
+            setUrgentTasks(highPriorityTasks);
+        }
+    }, [tasks]);
     
 
     return(
@@ -115,9 +148,9 @@ function OverviewPage() {
                     {/* welcome pill */}
                     <div className="welcomePillDiv">
                         <span className="badge badge-pill badge-secondary welcomePill">
-                            <img src={avatar} className="rounded-circle" id="avatar" alt="Avatar" />   
+                            <img src={avatarUrl} className="rounded-circle" id="avatar" alt="Avatar" />   
                             {/* <div className="welcomePillPhoto"></div> */}
-                            <p id="welcomePillTextArea"><span id="welcomePillText">Welcome</span><span>Joshua</span></p>
+                            <p id="welcomePillTextArea"><span id="welcomePillText">Welcome</span><span>{userData ? userData.fname : 'Loading...'}</span></p>
                         </span>
                     </div>
                     {/* menu list */}
@@ -145,7 +178,9 @@ function OverviewPage() {
                             <h2 className="title">Overview</h2>
                         </div>
                         <div className="rightMiddleHeader">
-                            <input className="form-control" type="text"></input>
+                            <input className="form-control" type="text" placeholder="Search tasks by description" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+                            <button onClick={handleSearch}>Search</button>
+                            <TaskList tasks={displayedTasks} handleTaskChecked={handleTaskChecked} />
                             <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={bell} /></button>
                                 {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge> */}
@@ -188,22 +223,22 @@ function OverviewPage() {
                     </div>
                     {/* Urgent Tasks */}
                     <div className="rightSidebarMiddle">
-                        <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>{urgentTasksCount}</Badge></h5>
+                        <h5>Urgent Tasks<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>{urgentTasks.length}</Badge></h5>
                         <div className="form-check">
                             {urgentTasks.map((task, index) => (
                                 <div key={index}>
-                                    <input className="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(index)}></input>
+                                    <input className="form-check-input" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(task.id)}></input>
                                     <label className="form-check-label" htmlFor={`flexCheckDefault${index}`}>
-                                        {task}
+                                        {task.name}
                                     </label>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    {/* Notifications */}
+                    {/* Notifications
                     <div className="rightSidebarBottom">
                         <h5>Notifications<Badge style={{ fontSize: ".75rem", marginLeft: "10px" }}>1</Badge></h5>
-                    </div>
+                    </div> */}
                     
                 </div>
             </div>

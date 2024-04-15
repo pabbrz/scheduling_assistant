@@ -152,7 +152,7 @@ const ProfilePage = () => {
                 <div className="rightContainer">
                     <div className="centered-element">
                     <img src={peopleWorking} width="500" height="500"></img>
-                    <h3>Scheduling Assisstant - </h3>
+                    <h3>Scheduling Assistant - </h3>
                     <h3>Simplify Your Life</h3>
                     <h8>All your tasks and preferences in one place</h8>
                     </div>
