@@ -44,6 +44,8 @@ function OverviewPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [displayedTasks, setDispayedTasks] = useState([]);
 
+    
+    //gets task by user ID
     useEffect(() => {
         fetchTasksByUserId(userID)
         .then((tasks) => setTasks(tasks))
@@ -94,6 +96,8 @@ function OverviewPage() {
         deleteTask(taskID);
     }
 
+
+    //search task by description
     const handleSearch = () => {
         const filteredTasks = tasks.filter((task) =>
             task.name.toLowerCase().includes(searchQuery.toLowerCase()),
