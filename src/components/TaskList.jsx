@@ -8,7 +8,7 @@ function TaskList({tasks, handleTaskChecked}) {
                     <div key={index}>
                         <input className="form-check-input taskListInput" type="checkbox" value="" id={`flexCheckDefault${index}`} onChange={() => handleTaskChecked(task.id)}></input>
                         <label className="form-check-label taskListLabel" htmlFor={`flexCheckDefault${index}`}>
-                            {task.name} {task.description} {task.due}
+                            {task.name} {task.due}
                         </label>
                     </div>
                 ))}
