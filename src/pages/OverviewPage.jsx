@@ -40,10 +40,21 @@ function OverviewPage() {
     const { currentUser } = useAuth();
     const userID = currentUser.uid;
     const [userData, error] = useUserData(userID);
+    const [setTasks] = useTasks();
+    const [searchQuery, setSearchQuery] = useState('');
+    const [displayedTasks, setDispayedTasks] = useState([]);
+
+    useEffect(() => {
+        fetchTasksByUserId(userID)
+        .then((tasks) => setTasks(tasks))
+        .catch((error) => console.log('Error fetching tasks:', error));
+    }, [userID, setTasks]);
+
 
     console.log('userID: ', userID);
 
     const tasks = useTasks();
+
 
     // // get tasks by userID
     // const [tasks, setTasks] = useState([]);
@@ -82,6 +93,22 @@ function OverviewPage() {
         //TODO remove task from urgentTasks, update firebase, and update state.
         deleteTask(taskID);
     }
+
+    const handleSearch = () => {
+        const filteredTasks = tasks.filter((task) =>
+            task.name.toLowerCase().includes(searchQuery.toLowerCase()),
+            task.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setDispayedTasks(filteredTasks);
+    }
+
+
+
+
+    // const displayTasks = searchQuery ? filteredTasks : tasks;
+
+
+
 
     // code for dynamically changing the middle portion of the page based on menu selection
     const [menuSelection, setMenuSelection] = useState('calendar');
@@ -145,7 +172,9 @@ function OverviewPage() {
                             <h2 className="title">Overview</h2>
                         </div>
                         <div className="rightMiddleHeader">
-                            <input className="form-control" type="text"></input>
+                            <input className="form-control" type="text" placeholder="Search tasks by description" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+                            <button onClick={handleSearch}>Search</button>
+                            <TaskList tasks={displayedTasks} handleTaskChecked={handleTaskChecked} />
                             <div className="iconWithBadge">
                                 <button className="iconButton"><img className="iconImg" src={bell} /></button>
                                 {/* <Badge className="myBadge" style={{ fontSize: ".50rem", marginLeft: "10px" }}>1</Badge> */}
