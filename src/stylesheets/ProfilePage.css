@@ -29,6 +29,17 @@
     margin-bottom: 80px;
 }
 
+#p::placeholder {
+    color: white; 
+}
+
+/* #avatarButton {
+    width: 200px;
+    height: 200px;
+    margin-top: 100px;
+    margin-bottom: 80px; 
+} */
+
 .profileInput {
     margin: 20px auto;
     /* background-color: #2b2b2b; */
