@@ -2,6 +2,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../stylesheets/LandingPage.css'
 import peopleWorking from "../assets/peopleWorking.png"
 
+import Head from 'next/head'
+import { Inter } from '@next/font/google'
+import NavBar from 'components/Navbar';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+
 import { useNavigate, Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
@@ -10,12 +15,21 @@ import { auth } from '../firebaseConfig';
 
 import Snackbar from '../components/Snackbar';
 
+const inter = Inter({ subsets: ['latin'] })
+
+
+
 function LandingPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
   let navigate = useNavigate();
+
+  const handleGoogle = async (e) => {
+    const provider = await new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
+  }
 
   const handleLogIn = async (e) => {
         e.preventDefault();
@@ -47,7 +61,12 @@ function LandingPage() {
               <h8>All your tasks and preferences in one place</h8>
             </div>
           </div>
-  
+      
+        <div className= 'pt-36 w-full flex'>
+          <button onClick={handleGoogle} className='mx-auto border-4 bg-green-500 text-white rounded-full'>
+            Sign In with Google
+          </button>
+        </div>
   
           <div className="rightContainer">
             <div className="centered-element">
