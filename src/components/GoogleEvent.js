@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { gapi } from 'gapi-script'
 import Event from './components/Event.js'
